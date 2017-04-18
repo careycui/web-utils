@@ -1,0 +1,15 @@
+{
+  "name": "animate-css",
+  "version": "1.0.0",
+  "description": "common animation css",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "animation",
+    "css3"
+  ],
+  "author": "chy",
+  "license": "ISC"
+}
