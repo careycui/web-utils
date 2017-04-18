@@ -1,0 +1,39 @@
+@charset "UTF-8";
+.ani {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  /*动画时间*/
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  animation-fill-mode: both;
+  /*动画效果播放前后均可见*/
+}
+
+.ani.wobble {
+  /*调整wobble时间   */
+  -webkit-animation-duration: .75s;
+  -moz-animation-duration: .75s;
+  animation-duration: .75s;
+}
+
+.ani.fadeIn {
+  /*调整fade时间*/
+  -webkit-animation-duration: 1.5s;
+  -moz-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+}
+
+.ani[class*='slide'] {
+  /*调整slide时间*/
+  -webkit-animation-duration: .5s;
+  -moz-animation-duration: .5s;
+  animation-duration: .5s;
+}
+
+.ani.infinite {
+  /*动画循环播放*/
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
