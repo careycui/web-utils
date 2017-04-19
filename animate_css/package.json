@@ -1,0 +1,22 @@
+{
+  "name": "animate-css",
+  "version": "1.0.0",
+  "description": "common animation css",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp css & gulp cssWmin"
+  },
+  "keywords": [
+    "animation",
+    "css3"
+  ],
+  "author": "chy",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0"
+  }
+}

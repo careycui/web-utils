@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<title>Common Animation</title>
+	<link rel="stylesheet" type="text/css" href="dist/animate-min.css">
+	<style type="text/css">
+		.main{
+			width:1000px;
+			margin: 0 auto;
+			background-color: #fff;
+			box-shadow: 0 0 5px rgba(0,0,0,.2);
+		}
+		.ani-container:after{
+			content:'';
+			display: block;
+			width:100%;
+			visibility: hidden;
+			clear:both;
+		}
+		.ani-stage{
+			padding:130px 50px 0;
+	        margin-bottom: 50px;
+		}
+		#ani-element{
+			width:350px;
+			height:150px;
+			margin-left: 550px;
+			background-color: #f0f;
+			text-align: center;
+			line-height: 150px;
+			vertical-align: middle;
+			color:#fff;
+		}
+		.ani-control{
+	        float:left;
+	        width:500px;
+	        height:100%;
+			padding:10px 20px;
+			text-align: left;
+	        overflow-x: auto;
+		}
+	    .category-box{
+	        margin-bottom: 20px;
+	    }
+	    .category-box h3{
+	        line-height: 24px;
+	        margin-bottom: 10px;
+	    }
+	    .ani-btn{
+	        margin-bottom: 10px;
+	    }
+	</style>
+</head>
+<body>
+	<div class="main">
+        <div class="ani-container">
+            <div class="ani-control">
+                <div class="category-box">
+                    <h3>Common animation</h3>
+                    <button type="button" class="btn btn-primary ani-btn" data-animation="ani flash">Flash</button>
+                    <button type="button" class="btn btn-primary ani-btn" data-animation="ani bounce">Bounce</button>
+                    <button type="button" class="btn btn-primary ani-btn" data-animation="ani wobble">Wobble</button>
+                    <button type="button" class="btn btn-primary ani-btn" data-animation="ani shake">Shake</button>
+                    <button type="button" class="btn btn-primary ani-btn" data-animation="ani rubberband">Rubberband</button>
+                    <button type="button" class="btn btn-primary ani-btn" data-animation="ani pulse">Pulse</button>
+                    <button type="button" class="btn btn-primary ani-btn" data-animation="ani swing">Swing</button>
+                </div>
+                <div class="category-box">
+                    <h3>FadeIn Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani fadeIn">FadeIn</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani fadeInDown">FadeInDown</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani fadeInUp">FadeInUp</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani fadeInLeft">FadeInLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani fadeInRight">FadeInRight</button>
+                </div>
+                <div class="category-box">
+                    <h3>FadeOut Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani fadeOut">FadeOut</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani fadeOutDown">FadeOutDown</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani fadeOutUp">FadeOutUp</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani fadeOutLeft">FadeOutLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani fadeOutRight">FadeOutRight</button>
+                </div>
+                <div class="category-box">
+                    <h3>BounceIn Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani bounceIn">BounceIn</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani bounceInDown">BounceInDown</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani bounceInUp">BounceInUp</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani bounceInLeft">BounceInLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani bounceInRight">BounceInRight</button>
+                </div>
+                <div class="category-box">
+                    <h3>BounceOut Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani bounceOut">BounceOut</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani bounceOutDown">BounceOutDown</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani bounceOutUp">BounceOutUp</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani bounceOutLeft">BounceOutLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani bounceOutRight">BounceOutRight</button>
+                </div>
+                <div class="category-box">
+                    <h3>Slide Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInDown">slideInDown</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInUp">slideInUp</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInLeft">slideInLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInRight">slideInRight</button>
+                </div>
+                <div class="category-box">
+                    <h3>RotateIn Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani RotateIn">RotateIn</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rotateInDownLeft">RotateInDownLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani RotateInDownRight">RotateInDownRight</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani RotateInUpLeft">RotateInUpLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani RotateInUpRight">RotateInUpRight</button>
+                </div>
+                <div class="category-box">
+                    <h3>RotateOut Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani RotateOut">RotateOut</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rotateOutDownLeft">RotateOutDownLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani RotateOutDownRight">RotateOutDownRight</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani RotateOutUpLeft">RotateOutUpLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani RotateOutUpRight">RotateOutUpRight</button>
+                </div>
+                <div class="category-box">
+                    <h3>ZoomIn Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani zoomIn">ZoomIn</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani zoomInDown">ZoomInDown</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani zoomInUp">ZoomInUp</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani zoomInLeft">ZoomInLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani zoomInRight">ZoomInRight</button>
+                </div>
+                <div class="category-box">
+                    <h3>ZoomOut Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani zoomOut">ZoomOut</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani zoomOutDown">ZoomOutDown</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani zoomOutUp">ZoomOutUp</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani zoomOutLeft">ZoomOutLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani zoomOutRight">ZoomOutRight</button>
+                </div>
+                <div class="category-box">
+                    <h3>Special</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani hinge">Hinge</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rollIn">RollIn</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rollOut">RollOut</button>
+                </div>
+            </div>
+            <div class="ani-stage">
+                <div id="ani-element">
+                    Common Animation CSS
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../lib/jquery.min.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+			$('.ani-btn').on('click',function(){
+				var $ele = $(this),
+					ani = $ele.data('animation');
+
+				$('#ani-element').removeClass();
+				setTimeout(function(){
+					$('#ani-element').addClass(ani);
+				},0);
+			});
+		});
+    </script>
+</body>
+</html>

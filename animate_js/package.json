@@ -1,0 +1,15 @@
+{
+  "name": "animate-js",
+  "version": "1.0.0",
+  "description": "animation js",
+  "main": "index.html",
+  "scripts": {
+    "test": "///"
+  },
+  "keywords": [
+    "animate",
+    "javascript"
+  ],
+  "author": "chy",
+  "license": "ISC"
+}

@@ -1,0 +1,1 @@
+!function(e,t){if("function"==typeof define&&define.amd)define.amd?define(["jQuery"],function(){return t(jQuery)}):define(function(e,n,o){var f=e("jQuery");o.exports=t(f)});else{if("object"!=typeof module||!module.exports)return t(e),e;module.exports=t(e)}}(jQuery,function(e){e.extend({alert:function(){console.log("test test test")}})});

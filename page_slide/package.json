@@ -1,0 +1,21 @@
+{
+  "name": "full_page_slide",
+  "version": "1.0.0",
+  "description": "page slide for pc / mobile",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp copy & gulp uglify"
+  },
+  "keywords": [
+    "page",
+    "slide"
+  ],
+  "author": "chy",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.1.2",
+    "pump": "^1.0.2"
+  }
+}
