@@ -22,7 +22,8 @@
 })(jQuery,function($){
 	"use strict";
 
-	var scrollAble = true,
+	var scrollAble = true, //是否可以开始切换
+		hasScrolled = false, //是否已经执行过切换方法
 		timeoutId = void 0,
 		defaults = {
 			sectionPanel: '.panel', //代表每屏
@@ -44,6 +45,7 @@
 		this.renderHtml();
 		this.bindEvent();
 
+		this.animateScrollTo(this.curIndex);
 	}
 	/**
 	 * 获取每屏元素
@@ -89,7 +91,6 @@
 
 		this.curIndex = ops.curIndex || 0; //设置当前展示页页码
 		this.nextIndex = void 0; //声明下张显示页页码
-		this.ifMoving = false; //初始化声明是否可以触发切换
 	};
 	PageSlide.prototype.renderHtml = function(){
 		var that = this,
@@ -104,9 +105,9 @@
 			configs[i].scrollTop = $(panels[i]).offset().top;
 		}
 
-		me.css({
-			overflow: 'hidden'
-		});
+		// me.css({
+		// 	overflow: 'hidden'
+		// });
 
 	};
 	PageSlide.prototype.bindEvent = function(){
@@ -115,17 +116,22 @@
 		var _scroll = {
 			/**
 			 * 鼠标按下时进行的处理
-			 * 		1、当前页面不可滚动，scrollAble = false
+			 * 		1、当前页面不可切换，scrollAble = false
+			 * 		2、当前页面是否处于切换状态， 是：不继续操作;不是：继续操作
 			 */
 			handleMouseDown: function(){
 				scrollAble = false;
+				hasScrolled = false;
 			},
 			/**
 			 * 鼠标松开时进行的处理
-			 * 		2、当前页面可滚动，scrollAble = true
+			 * 		2、当前页面可切换，scrollAble = true
 			 */
 			handleMouseUp: function(){
 				scrollAble = true;
+				if(hasScrolled){
+					_scroll.calculateNearst();
+				}
 			},
 			/**
 			 * 滚动条滚动监听处理方法
@@ -135,13 +141,13 @@
 					clearTimeout(timeoutId);
 				}
 				timeoutId = setTimeout(function(){
+					hasScrolled = true;
 					if(scrollAble === false){
 						return false;
 					}
 					scrollAble = false;
 					_scroll.calculateNearst();
 				},160);
-
 			},
 			calculateNearst: function(){
 				var scrollTop = $(window).scrollTop(),
@@ -163,10 +169,13 @@
 			wheelHandler: function(e, delta){
 				e.preventDefault();
 				delta = delta || -e.originalEvent.detail / 3 || e.originalEvent.wheelDelta / 120;
-				if(timeoutId){
-					clearTimeout(timeoutId);
+				if(scrollAble === false){
+					return false;
 				}
-				timeoutId = setTimeout(function(){
+				// if(timeoutId){
+				// 	clearTimeout(timeoutId);
+				// }
+				// timeoutId = setTimeout(function(){
 					if(delta < 0){
 						if (that.curIndex >= that.panels.length - 1)return;
 	                	that.curIndex++;
@@ -177,7 +186,7 @@
 						that.curIndex = 0;
 					}
 					that.animateScrollTo(that.curIndex);
-				},160);
+				// },100);
 			},
 			init: function() {
 		        if (that.options.scrollbar) {
@@ -200,10 +209,15 @@
 		var that  = this,
 			ops = that.options,
 			configs = that.configs;
+
 		if(configs[index]){
+			scrollAble = false;
 			$('html,body').animate({
 				scrollTop: configs[index].scrollTop
 			}, ops.scrollSpeed);
+			$('html,body').promise().done(function(){
+				scrollAble = true;
+			});
 		}
 	};
 
