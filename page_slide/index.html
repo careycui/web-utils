@@ -3,39 +3,95 @@
 <head>
 	<meta charset="utf-8">
 	<title>Example</title>
+	<link rel="stylesheet" type="text/css" href="../animate_css/dist/animate-min.css">
 	<style type="text/css">
 		*{
 			margin: 0;
 			padding: 0;
 		}
+		.section{
+			position: relative;
+		}
+		.header,.footer{
+			height: 400px;
+			width: 100%;
+		}
+		.ani{
+			position: absolute;
+			left:100px;
+			top: 400px;
+			width: 200px;
+			height: 100px;
+			background: #000;
+		}
+		.panel{
+			width: 100%;
+			transition: all .5s;
+			transform: translate(-200%,0);
+		}
+		.slide{
+		}
+		.slide-in{
+			position: absolute;
+			top: 0;
+			transform: translate(0,0);
+		}
+		.slide-out{
+			transform: translate(200%,0);
+		}
 	</style>
 	<script type="text/javascript" src="../lib/jquery.min.js"></script>
 </head>
 <body>
-	<div class="slide" id="slide">
-		<div class="section panel" style="background-color: red;">
+	<!-- <div class="header" style="background-color: #dedede;">HEADER</div> -->
+	<div class="ysslide" id="ysslide">
+		<div class="section panel" style="background-color: green;">
+			<div class="ani" data-ani="bounceIn"></div>
 			first
 		</div>
-		<div class="section panel" style="background-color: yellow;">
+		<div class="section panel" style="background-color: #f0f;">
+			<div class="ani" data-ani="rotateInDownLeft"></div>
 			second
 		</div>
 		<div class="section panel" style="background-color: green;">
+			<div class="ani" data-ani="slideInLeft"></div>
 			third
 		</div>
 		<div class="section panel" style="background-color: blue;">
+			<div class="ani" data-ani="zoomIn"></div>
 			fourth
 		</div>
 		<div class="section panel" style="background-color: #f0f;">
+			<div class="ani" data-ani="rubberband"></div>
 			fifth
 		</div>
 	</div>
+	<!-- <div class="footer" style="background-color: #dedede;">FOOTER</div> -->
 	<script type="text/javascript" src="src/ys-slide.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$('.panel').height($(window).height());
-			$('#slide').ysSlide({
-				scrollbar: true,
-				scrollSpeed: 1000
+
+			$('#ysslide').ysSlide({
+				renderType: 'inner',
+				// scrollbar: true,
+				scrollSpeed: 600,
+				insertSection: '.header,.footer',
+				animateClass: 'slide',
+				beforeScroll: function(curIndex,nextIndex){
+					var panels = this.panels,
+						$panel = $(panels[curIndex]),
+						$ani = $panel.find('.ani'),
+						animation = $ani.data('ani');
+					$ani.removeClass(animation);
+				},	
+				afterScroll: function(curIndex){
+					var panels = this.panels,
+						$panel = $(panels[curIndex]),
+						$ani = $panel.find('.ani'),
+						animation = $ani.data('ani');
+					$ani.addClass(animation);
+				}
 			});
 		});
 	</script>
