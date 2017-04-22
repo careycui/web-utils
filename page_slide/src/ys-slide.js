@@ -32,7 +32,7 @@
 		scrollTime = new Date().getTime(),
 		defaults = {
 			sectionPanel: '.panel', //代表每屏
-			scrollSpeed: 600, //滚动速度
+			scrollSpeed: 600, //滚动速度,当renderType == inner，并且设置了自定义的animateClass，则此值无效
 			scrollHeight: $(window).height(), //滚动高度
 			nav: false, //是否显示导航
 			keyAble: false, //键盘方向键是否可以控制滚动
@@ -53,6 +53,10 @@
 			// if renderType === 'inner'
 			animateClass: ''
 		};
+
+	$.easing['easeOutExpo'] = function(x, t, b, c, d) {
+		return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+	};
 	/**
 	 * 全屏滚动构造方法
 	 * @param {object} me 全屏滑动容器
@@ -162,6 +166,9 @@
 					width: '100%',
 					height: '100%'
 				});
+				if(ops.animateClass){
+					me.find(ops.sectionPanel).addClass(ops.animateClass);
+				}
 
 			}
 		};
@@ -306,6 +313,31 @@
 		    }
 		}
 		_scroll.init();
+		var _ani = {
+			transitionEnd: function(){
+
+			},
+			animationEnd: function(){
+
+			},
+			init: function(){
+				var i = 0;
+
+				for(i;i < that.panels.length;i++){
+					$(that.panels[i]).on('webkitTransitionEnd transitionEnd',function(){
+						if($(this).hasClass(ops.animateClass + '-out')){
+							$(this).removeClass(ops.animateClass + '-out active');
+						}
+						if($(this).hasClass(ops.animateClass + '-in')){
+							$(this).removeClass(ops.animateClass + '-in');
+						}
+					});
+				}
+			}
+		}
+		if(ops.animateClass){
+			// _ani.init();
+		}
 	};
 	PageSlide.prototype.beforeAnimate = function(){
 		var that  = this,
@@ -328,16 +360,16 @@
 			configs = that.configs;
 
 		curIndex = nextIndex;
-		$(panels[curIndex]).addClass('ys-ani');
-		if(typeof ops.afterScroll === 'function'){
-			ops.afterScroll.call(that, curIndex);
-		}
 		if(ops.delay){
 			setTimeout(function(){
 				wheelAble = true;
 			},ops.delay);
 		}else{
 			wheelAble = true;
+		}
+		$(panels[curIndex]).addClass('ys-ani');
+		if(typeof ops.afterScroll === 'function'){
+			ops.afterScroll.call(that, curIndex);
 		}
 	};
 	PageSlide.prototype.animateScrollTo = function(){
@@ -351,22 +383,35 @@
 			outer: function(){
 				$('html,body').animate({
 					scrollTop: configs[nextIndex].scrollTop
-				}, ops.scrollSpeed, function(){
+				}, ops.scrollSpeed, 'easeOutExpo');
+				$('html,body').promise().done(function(){
 					that.afterAnimate();
 				});
 			},
 			inner: function(){
 				if(ops.animateClass){
 					if(curIndex != nextIndex){
-						$(panels[curIndex]).addClass('slide-out');
-						$(panels[curIndex]).removeClass('slide-in');
+						$(panels[curIndex]).addClass( ops.animateClass + '-out');
+
+						$(panels[curIndex]).promise().done(function(){
+							$(panels[curIndex]).removeClass( ops.animateClass + '-out active');
+						});
 					}
-					$(panels[nextIndex]).addClass('slide-in');
-					that.afterAnimate();
+
+					$(panels[nextIndex]).addClass( ops.animateClass + '-in');
+					$(panels[nextIndex]).promise().done(function(){
+						$(panels[nextIndex]).addClass('active').removeClass( ops.animateClass + '-in');
+
+						setTimeout(function(){
+							that.afterAnimate();
+						},ops.scrollSpeed);
+					});
+
 				}else{
 					me.animate({
 						top: configs[nextIndex].top
-					}, ops.scrollSpeed, function(){
+					}, ops.scrollSpeed, 'easeOutExpo');
+					me.promise().done(function(){
 						that.afterAnimate();
 					});
 				}

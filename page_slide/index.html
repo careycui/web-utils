@@ -23,21 +23,27 @@
 			width: 200px;
 			height: 100px;
 			background: #000;
+			animation-delay: 1s;
 		}
-		/*.panel{
-			width: 100%;
-			transition: all .5s;
-			transform: translate(-200%,0);
-		}*/
 		.slide{
-		}
-		.slide-in{
 			position: absolute;
 			top: 0;
+			width: 100%;
+			transition: all 1s;
+			visibility: hidden;
+
+			transform: translate(-100%,0);
+		}
+		.slide-in{
+			visibility: visible;
 			transform: translate(0,0);
 		}
-		.slide-out{
-			transform: translate(200%,0);
+		.slide.active{
+			visibility: visible;
+			transform: translate(0,0);
+		}
+		.slide-out.active{
+			transform: translate(100%,0);
 		}
 	</style>
 	<script type="text/javascript" src="../lib/jquery.min.js"></script>
@@ -73,12 +79,12 @@
 			$('.panel').height($(window).height());
 
 			$('#ysslide').ysSlide({
-				// renderType: 'inner',
+				renderType: 'inner',
 				// scrollbar: true,
-				scrollSpeed: 600,
-				// delay: 3000,
+				scrollSpeed: 1000,
+				// delay: 2000,
 				insertSection: '.header,.footer',
-				// animateClass: 'slide',
+				animateClass: 'slide',
 				beforeScroll: function(curIndex,nextIndex){
 					var panels = this.panels,
 						$panel = $(panels[curIndex]),
