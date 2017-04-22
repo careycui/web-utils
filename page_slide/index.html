@@ -24,11 +24,11 @@
 			height: 100px;
 			background: #000;
 		}
-		.panel{
+		/*.panel{
 			width: 100%;
 			transition: all .5s;
 			transform: translate(-200%,0);
-		}
+		}*/
 		.slide{
 		}
 		.slide-in{
@@ -73,18 +73,19 @@
 			$('.panel').height($(window).height());
 
 			$('#ysslide').ysSlide({
-				renderType: 'inner',
+				// renderType: 'inner',
 				// scrollbar: true,
 				scrollSpeed: 600,
+				// delay: 3000,
 				insertSection: '.header,.footer',
-				animateClass: 'slide',
+				// animateClass: 'slide',
 				beforeScroll: function(curIndex,nextIndex){
 					var panels = this.panels,
 						$panel = $(panels[curIndex]),
 						$ani = $panel.find('.ani'),
 						animation = $ani.data('ani');
 					$ani.removeClass(animation);
-				},	
+				},
 				afterScroll: function(curIndex){
 					var panels = this.panels,
 						$panel = $(panels[curIndex]),

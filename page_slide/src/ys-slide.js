@@ -28,12 +28,15 @@
 		timeoutId = void 0,
 		curIndex = 0, //当前屏索引
 		nextIndex = void 0, //下一屏索引
+		wheelValues = [], //一段时间内滚轮事件的所有值
+		scrollTime = new Date().getTime(),
 		defaults = {
 			sectionPanel: '.panel', //代表每屏
 			scrollSpeed: 600, //滚动速度
 			scrollHeight: $(window).height(), //滚动高度
 			nav: false, //是否显示导航
 			keyAble: false, //键盘方向键是否可以控制滚动
+			delay: 0, //开始切换的延迟时间
 			beforeScroll: function(curIndex, nextIndex){},
 			afterScroll: function(curIndex){},
 			/**
@@ -165,6 +168,26 @@
 
 		_render[ops.renderType]();
 	};
+	var ifScrolled = function(wheelValues){
+		function average(num) {
+			var sum = 0;
+
+			var lastElements = wheelValues.slice(Math.max(wheelValues.length - num, 1));
+
+            for(var i = 0; i < lastElements.length; i++){
+            	sum += lastElements[i];
+            }
+            return Math.ceil(sum/num);
+		}
+
+		var avEnd = average(10);
+        var avMiddle = average(70);
+        if(avEnd >= avMiddle) {
+			return true;
+		} else {
+			return false;
+		}
+	};
 	/**
 	 * 绑定事件
 	 * 
@@ -234,8 +257,19 @@
 			},
 			wheelHandler: function(e, delta){
 				e.preventDefault();
-				var index = curIndex;
-				delta = delta || -e.originalEvent.detail / 3 || e.originalEvent.wheelDelta / 120;
+				var index = curIndex,
+					currentTime = new Date().getTime(),
+					value = delta || -e.originalEvent.detail || e.originalEvent.wheelDelta;
+					delta = Math.max(-1, Math.min(1, value));
+
+				if(wheelValues.length > 149){
+					wheelValues.shift();
+				}
+				wheelValues.push(Math.abs(value));
+				if((currentTime - scrollTime) > 200){
+					wheelValues = [];
+				}
+				scrollTime = currentTime;
 				if(wheelAble === false){
 					return false;
 				}
@@ -248,8 +282,11 @@
 				}else{
 					index = 0;
 				}
-				nextIndex = index;
-				that.animateScrollTo();
+				//处理滚动过快，连续滚动多屏的问题
+				if(ifScrolled(wheelValues)){
+					nextIndex = index;
+					that.animateScrollTo();
+				}
 			},
 			init: function() {
 				if(ops.renderType === 'outer'){
@@ -290,11 +327,17 @@
 			panels = that.panels,
 			configs = that.configs;
 
-		wheelAble = true;
 		curIndex = nextIndex;
 		$(panels[curIndex]).addClass('ys-ani');
 		if(typeof ops.afterScroll === 'function'){
 			ops.afterScroll.call(that, curIndex);
+		}
+		if(ops.delay){
+			setTimeout(function(){
+				wheelAble = true;
+			},ops.delay);
+		}else{
+			wheelAble = true;
 		}
 	};
 	PageSlide.prototype.animateScrollTo = function(){
