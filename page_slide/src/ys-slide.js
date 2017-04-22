@@ -394,15 +394,17 @@
 						$(panels[curIndex]).addClass( ops.animateClass + '-out');
 
 						$(panels[curIndex]).promise().done(function(){
-							$(panels[curIndex]).removeClass( ops.animateClass + '-out active');
+							setTimeout(function(){
+								$(panels[curIndex]).removeClass( ops.animateClass + '-out active');
+							},ops.scrollSpeed);
 						});
 					}
 
 					$(panels[nextIndex]).addClass( ops.animateClass + '-in');
 					$(panels[nextIndex]).promise().done(function(){
-						$(panels[nextIndex]).addClass('active').removeClass( ops.animateClass + '-in');
 
 						setTimeout(function(){
+							$(panels[nextIndex]).addClass('active').removeClass( ops.animateClass + '-in');
 							that.afterAnimate();
 						},ops.scrollSpeed);
 					});
