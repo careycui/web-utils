@@ -23,28 +23,69 @@
 			width: 200px;
 			height: 100px;
 			background: #000;
-			animation-delay: 1s;
 		}
-		.slide{
-			position: absolute;
-			top: 0;
-			width: 100%;
-			transition: all 1s;
-			visibility: hidden;
-
-			transform: translate(-100%,0);
+		.panel{
+		    width: 100%;
+		    height: 100%;
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    visibility: hidden;
+		    overflow: hidden;
+		    -webkit-backface-visibility: hidden;
+		    -moz-backface-visibility: hidden;
+		    backface-visibility: hidden;
+		    -webkit-transform: translate3d(0, 0, 0);
+		    -moz-transform: translate3d(0, 0, 0);
+		    transform: translate3d(0, 0, 0);
+		    -webkit-transform-style: preserve-3d;
+		    -moz-transform-style: preserve-3d;
+		    transform-style: preserve-3d;
+		}
+		.ys-ani{
+			visibility: visible;
+    		z-index: 1;
+		}
+		@-webkit-keyframes moveFromLeft {
+			from{ -webkit-transform: translateX(-100%);  }
+			to { -webkit-transform: translateX(0); }
+		}
+		@-moz-keyframes moveFromLeft {
+			from{ -moz-transform: translateX(-100%);  }
+			to { -moz-transform: translateX(0); }
+		}
+		@keyframes moveFromLeft {
+			from{ transform: translateX(-100%);  }
+			to { transform: translateX(0); }
 		}
 		.slide-in{
-			visibility: visible;
-			transform: translate(0,0);
+			-webkit-animation: moveFromLeft .6s ease both;
+			-moz-animation: moveFromLeft .6s ease both;
+			animation: moveFromLeft .6s ease both;
+			-webkit-animation-delay: .4s;
+			-moz-animation-delay: .4s;
+			animation-delay: .4s;
+			z-index: 10;
 		}
-		.slide.active{
-			visibility: visible;
-			transform: translate(0,0);
+		@-webkit-keyframes rotateOutNewspaper {
+			from{ -webkit-transform: translateZ(0) rotateZ(0); opacity: 1; }
+			to { -webkit-transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
 		}
-		.slide-out.active{
-			visibility: hidden;
-			transform: translate(100%,0);
+		@-moz-keyframes rotateOutNewspaper {
+			from{ -moz-transform: translateZ(0) rotateZ(0); opacity: 1; }
+			to { -moz-transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
+		}
+		@keyframes rotateOutNewspaper {
+			from{ transform: translateZ(0) rotateZ(0); opacity: 1; }
+			to { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
+		}
+		.slide-out{
+			-webkit-transform-origin: 50% 50%;
+			-webkit-animation: rotateOutNewspaper .5s both ease-in;
+			-moz-transform-origin: 50% 50%;
+			-moz-animation: rotateOutNewspaper .5s both ease-in;
+			transform-origin: 50% 50%;
+			animation: rotateOutNewspaper .5s both ease-in;
 		}
 	</style>
 	<script type="text/javascript" src="../lib/jquery.min.js"></script>
@@ -52,7 +93,7 @@
 <body>
 	<!-- <div class="header" style="background-color: #dedede;">HEADER</div> -->
 	<div class="ysslide" id="ysslide">
-		<div class="section panel" style="background-color: green;">
+		<div class="section panel slide-in1" style="background-color: green;">
 			<div class="ani" data-ani="bounceIn"></div>
 			first
 		</div>
@@ -82,10 +123,13 @@
 			$('#ysslide').ysSlide({
 				renderType: 'inner',
 				// scrollbar: true,
-				scrollSpeed: 1000,
+				scrollSpeed: 600,
 				// delay: 2000,
 				insertSection: '.header,.footer',
-				animateClass: 'slide',
+				animateClass: {
+					in: 'slide-in',
+					out: 'slide-out'
+				},
 				beforeScroll: function(curIndex,nextIndex){
 					var panels = this.panels,
 						$panel = $(panels[curIndex]),

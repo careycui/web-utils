@@ -51,7 +51,7 @@
 			insertSection: '' ,//一般用于header，footer
 			scrollbar: false, //是否显示滚动条
 			// if renderType === 'inner'
-			animateClass: ''
+			animateClass: void 0
 		};
 
 	$.easing['easeOutExpo'] = function(x, t, b, c, d) {
@@ -132,7 +132,7 @@
 
 		this.configs = setPanelConfig(panels);//设置存储数据
 
-		curIndex = ops.curIndex || 0; //设置当前展示页页码
+		curIndex = 0; //设置当前展示页页码
 		nextIndex = ops.curIndex || 0; //声明下张显示页页码
 	};
 	/**
@@ -197,7 +197,7 @@
 	};
 	/**
 	 * 绑定事件
-	 * 
+	 *
 	 */
 	PageSlide.prototype.bindEvent = function(){
 		var that = this,
@@ -210,8 +210,8 @@
 			 * 		2、handleScrolled是否已经执行，默认未执行
 			 */
 			handleMouseDown: function(){
-				scrollAble = false; 
-				hasScrolled = false;  
+				scrollAble = false;
+				hasScrolled = false;
 			},
 			/**
 			 * 鼠标松开时进行的处理
@@ -314,7 +314,7 @@
 		}
 		_scroll.init();
 		var _ani = {
-			transitionEnd: function(){
+			tAnimationEnd: function(){
 
 			},
 			animationEnd: function(){
@@ -324,19 +324,19 @@
 				var i = 0;
 
 				for(i;i < that.panels.length;i++){
-					$(that.panels[i]).on('webkitTransitionEnd transitionEnd',function(){
-						if($(this).hasClass(ops.animateClass + '-out')){
-							$(this).removeClass(ops.animateClass + '-out active');
+					$(that.panels[i]).on('webkitAnimationEnd animationEnd',function(){
+						if($(this).hasClass(ops.animateClass.out)){
+							$(this).removeClass(ops.animateClass.out);
 						}
-						if($(this).hasClass(ops.animateClass + '-in')){
-							$(this).removeClass(ops.animateClass + '-in');
+						if($(this).hasClass(ops.animateClass.in)){
+							$(this).removeClass(ops.animateClass.in);
 						}
 					});
 				}
 			}
 		}
 		if(ops.animateClass){
-			// _ani.init();
+			_ani.init();
 		}
 	};
 	PageSlide.prototype.beforeAnimate = function(){
@@ -347,8 +347,8 @@
 
 		scrollAble = false;
 		wheelAble = false;
-		$(panels[curIndex]).removeClass('ys-ani');
-
+		$(panels[curIndex]).addClass('ys-ani');
+		$(panels[nextIndex]).addClass('ys-ani');
 		if(typeof ops.beforeScroll === 'function'){
 			ops.beforeScroll.call(that, curIndex, nextIndex);
 		}
@@ -358,8 +358,6 @@
 			ops = that.options,
 			panels = that.panels,
 			configs = that.configs;
-
-		curIndex = nextIndex;
 		if(ops.delay){
 			setTimeout(function(){
 				wheelAble = true;
@@ -367,7 +365,10 @@
 		}else{
 			wheelAble = true;
 		}
-		$(panels[curIndex]).addClass('ys-ani');
+		if(curIndex != nextIndex){
+			$(panels[curIndex]).removeClass('ys-ani');
+			curIndex = nextIndex;
+		}
 		if(typeof ops.afterScroll === 'function'){
 			ops.afterScroll.call(that, curIndex);
 		}
@@ -391,24 +392,15 @@
 			inner: function(){
 				if(ops.animateClass){
 					if(curIndex != nextIndex){
-						$(panels[curIndex]).addClass( ops.animateClass + '-out');
-
-						$(panels[curIndex]).promise().done(function(){
-							setTimeout(function(){
-								$(panels[curIndex]).removeClass( ops.animateClass + '-out active');
-							},ops.scrollSpeed);
-						});
-					}
-
-					$(panels[nextIndex]).addClass( ops.animateClass + '-in');
-					$(panels[nextIndex]).promise().done(function(){
-
+						$(panels[curIndex]).addClass(ops.animateClass.out);
+						$(panels[nextIndex]).addClass( ops.animateClass.in);
+						
 						setTimeout(function(){
-							$(panels[nextIndex]).addClass('active').removeClass( ops.animateClass + '-in');
 							that.afterAnimate();
 						},ops.scrollSpeed);
-					});
-
+					}else{
+						that.afterAnimate();
+					}
 				}else{
 					me.animate({
 						top: configs[nextIndex].top
