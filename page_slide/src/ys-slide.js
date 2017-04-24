@@ -31,6 +31,7 @@
 		nextIndex = void 0, //下一屏索引
 		wheelValues = [], //一段时间内滚轮事件的所有值
 		scrollTime = new Date().getTime(),
+		animationEnd = void 0,
 		defaults = {
 			sectionPanel: '.panel', //代表每屏
 			scrollSpeed: 600, //滚动速度,当renderType == inner，并且设置了自定义的animateClass，则此值表示整个动画完成的时间
@@ -57,6 +58,22 @@
 
 	$.easing['easeOutExpo'] = function(x, t, b, c, d) {
 		return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+	};
+	/**
+	 * 检查是否支持新特性 animation，1、支持，则返回支持的事件名；2、不支持，返回false
+	 * @return {[type]} [description]
+	 */
+	var checkAnimation = function(){
+		var el = document.createElement('div'),
+			anis = {'animation':'animationEnd', 'WebkitAnimation':'webkitAnimationEnd', 'MozAnimation':'mozAnimationEnd'},
+			animateEnd = void 0;
+		for(var i in anis){
+			if(el.style[i] !== undefined){
+				animateEnd = anis[i];
+				break;
+			}
+		}
+		return (animateEnd ? animateEnd : false);
 	};
 	/**
 	 * 全屏滚动构造方法
@@ -135,6 +152,10 @@
 
 		curIndex = 0; //设置当前展示页页码
 		nextIndex = ops.curIndex || 0; //声明下张显示页页码
+
+		if(!(animationEnd = checkAnimation()) && ops.animateClass){
+			that.options.animateClass = void 0;
+		}
 	};
 	/**
 	 * 渲染组件所需的HTML片段，css样式
@@ -168,7 +189,7 @@
 					height: '100%'
 				});
 				if(ops.animateClass){
-					me.find(ops.sectionPanel).addClass(ops.animateClass);
+					me.find(ops.sectionPanel).addClass(ops.animateClass.clazz);
 				}
 
 			}
@@ -315,26 +336,17 @@
 		}
 		_scroll.init();
 		var _ani = {
-			tAnimationEnd: function(){
-
-			},
-			animationEnd: function(){
-
-			},
 			init: function(){
 				var i = 0;
 
 				for(i;i < that.panels.length;i++){
-					$(that.panels[i]).on('webkitAnimationEnd animationEnd',function(){
+					$(that.panels[i]).on(animationEnd ,function(){
 						if($(this).hasClass(ops.animateClass.out)){
 							$(this).removeClass(ops.animateClass.out);
 						}
 						if($(this).hasClass(ops.animateClass.in)){
 							$(this).removeClass(ops.animateClass.in);
 						}
-						// timoutId2 = setTimeout(function(){
-						// 	that.afterAnimate();
-						// },200);
 					});
 				}
 			}
@@ -343,6 +355,9 @@
 			_ani.init();
 		}
 	};
+	/**
+	 * 切换前处理方法
+	 */
 	PageSlide.prototype.beforeAnimate = function(){
 		var that  = this,
 			ops = that.options,
@@ -357,6 +372,9 @@
 			ops.beforeScroll.call(that, curIndex, nextIndex);
 		}
 	};
+	/**
+	 * 切换处理方法
+	 */
 	PageSlide.prototype.afterAnimate = function(){
 		var that  = this,
 			ops = that.options,
@@ -377,6 +395,9 @@
 			ops.afterScroll.call(that, curIndex);
 		}
 	};
+	/**
+	 * 切换方法
+	 */
 	PageSlide.prototype.animateScrollTo = function(){
 		var that = this,
 			me = that.me,
@@ -419,6 +440,7 @@
 			_move[ops.renderType]();
 		}
 	};
+	
 	$.fn.ysSlide = function(options, param) {
 		var that = this;
 	    return this.each(function() {
