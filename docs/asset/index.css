@@ -1,0 +1,30 @@
+.header{
+	background-color: #fb8c00;
+    padding-left: 100px;
+    height: 120px;
+    border-bottom: 1px solid #fb8c00;
+    line-height: 120px !important;
+    vertical-align: middle;
+    background: -webkit-linear-gradient(top left,#DC0000,#fb8c00);
+    background: -moz-linear-gradient(top left,#DC0000,#fb8c00);
+    background: -ms-linear-gradient(top left,#DC0000,#fb8c00);
+    background: -o-linear-gradient(top left,#DC0000,#fb8c00);
+    background: linear-gradient(to top left,#DC0000,#fb8c00);
+}
+.header h1, .header small{
+	color: #fff;
+}
+.header small{
+	font-size: 16px;
+}
+.header h1:after{
+	content: ' ';
+	position: absolute;
+	top: 80px;
+	left: 0;
+	width: 200px;
+	border: 1px solid #fff;
+}
+.content{
+	padding: 160px 20px 20px 20px;
+}
