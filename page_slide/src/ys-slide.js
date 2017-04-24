@@ -26,13 +26,14 @@
 		hasScrolled = false, //是否已经执行过切换方法
 		wheelAble = true, //滚轮是否可切换
 		timeoutId = void 0,
+		timoutId2 = void 0,
 		curIndex = 0, //当前屏索引
 		nextIndex = void 0, //下一屏索引
 		wheelValues = [], //一段时间内滚轮事件的所有值
 		scrollTime = new Date().getTime(),
 		defaults = {
 			sectionPanel: '.panel', //代表每屏
-			scrollSpeed: 600, //滚动速度,当renderType == inner，并且设置了自定义的animateClass，则此值无效
+			scrollSpeed: 600, //滚动速度,当renderType == inner，并且设置了自定义的animateClass，则此值表示整个动画完成的时间
 			scrollHeight: $(window).height(), //滚动高度
 			nav: false, //是否显示导航
 			keyAble: false, //键盘方向键是否可以控制滚动
@@ -331,6 +332,9 @@
 						if($(this).hasClass(ops.animateClass.in)){
 							$(this).removeClass(ops.animateClass.in);
 						}
+						// timoutId2 = setTimeout(function(){
+						// 	that.afterAnimate();
+						// },200);
 					});
 				}
 			}
@@ -394,10 +398,9 @@
 					if(curIndex != nextIndex){
 						$(panels[curIndex]).addClass(ops.animateClass.out);
 						$(panels[nextIndex]).addClass( ops.animateClass.in);
-						
 						setTimeout(function(){
 							that.afterAnimate();
-						},ops.scrollSpeed);
+						},(ops.scrollSpeed-10));
 					}else{
 						that.afterAnimate();
 					}

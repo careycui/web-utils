@@ -41,6 +41,7 @@
 		    -webkit-transform-style: preserve-3d;
 		    -moz-transform-style: preserve-3d;
 		    transform-style: preserve-3d;
+		    z-index: -1;
 		}
 		.ys-ani{
 			visibility: visible;
@@ -62,10 +63,7 @@
 			-webkit-animation: moveFromLeft .6s ease both;
 			-moz-animation: moveFromLeft .6s ease both;
 			animation: moveFromLeft .6s ease both;
-			-webkit-animation-delay: .4s;
-			-moz-animation-delay: .4s;
-			animation-delay: .4s;
-			z-index: 10;
+			z-index: 2;
 		}
 		@-webkit-keyframes rotateOutNewspaper {
 			from{ -webkit-transform: translateZ(0) rotateZ(0); opacity: 1; }
@@ -93,7 +91,7 @@
 <body>
 	<!-- <div class="header" style="background-color: #dedede;">HEADER</div> -->
 	<div class="ysslide" id="ysslide">
-		<div class="section panel slide-in1" style="background-color: green;">
+		<div class="section panel" style="background-color: green;">
 			<div class="ani" data-ani="bounceIn"></div>
 			first
 		</div>
@@ -123,8 +121,8 @@
 			$('#ysslide').ysSlide({
 				renderType: 'inner',
 				// scrollbar: true,
-				scrollSpeed: 600,
-				// delay: 2000,
+				scrollSpeed: 590,
+				delay: 900,
 				insertSection: '.header,.footer',
 				animateClass: {
 					in: 'slide-in',
