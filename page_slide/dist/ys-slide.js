@@ -65,7 +65,7 @@
 	 */
 	var checkAnimation = function(){
 		var el = document.createElement('div'),
-			anis = {'animation':'animationEnd', 'WebkitAnimation':'webkitAnimationEnd', 'MozAnimation':'mozAnimationEnd'},
+			anis = {'animation':'animationend', 'WebkitAnimation':'webkitAnimationEnd', 'MozAnimation':'mozAnimationEnd'},
 			animateEnd = void 0;
 		for(var i in anis){
 			if(el.style[i] !== undefined){
@@ -340,7 +340,7 @@
 				var i = 0;
 
 				for(i;i < that.panels.length;i++){
-					$(that.panels[i]).on(animationEnd ,function(){
+					$(that.panels[i]).on(animationEnd,function(){
 						if($(this).hasClass(ops.animateClass.out)){
 							$(this).removeClass(ops.animateClass.out);
 						}
@@ -440,7 +440,7 @@
 			_move[ops.renderType]();
 		}
 	};
-	
+
 	$.fn.ysSlide = function(options, param) {
 		var that = this;
 	    return this.each(function() {
