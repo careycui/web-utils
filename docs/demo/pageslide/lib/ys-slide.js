@@ -440,25 +440,39 @@
 			_move[ops.renderType]();
 		}
 	};
-
+	/**
+	 * panel切换方法
+	 * @param  {number} index 切换到的判了index
+	 */
+	PageSlide.prototype.move = function(index){
+		var that = this,
+			panels = that.panels,
+			length = panels.length;
+		if(wheelAble == false){
+			return false;
+		}
+		if(index > -1 && index < length){
+			nextIndex = index;
+			that.animateScrollTo();
+		}
+	};
+	/**
+	 * 外部访问方法
+	 * @type {Array}
+	 */
+	var public_method = ['move'];
 	$.fn.ysSlide = function(options, param) {
-		var that = this;
 	    return this.each(function() {
-	      var slide = $.data(that, 'ysSlide');
-
+	      var slide = $(this).data('slide');
 	      //初始化相关
 	      if (!slide) {
-	        //参数设置
-	        slide = new PageSlide($(that), options);
-	        $.data(that, 'ysSlide', slide);
+	        $.data(this, 'slide', new PageSlide($(this), options));
 	      }
-
 	      // 调用方法
-	      if (typeof options === "string" && typeof slide[options] == "function") {
+	      if (typeof options === "string" && (public_method.join(',').indexOf(options) > -1) && typeof slide[options] == "function") {
 	        // 执行插件的方法
 	        slide[options].call(slide, param);
 	      }
-
 	    });
 	  };
 });

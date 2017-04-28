@@ -24,6 +24,17 @@
 			height: 100px;
 			background: #000;
 		}
+		.info{
+			position: absolute;
+			top: 50%;
+			margin-left: -23px;
+			left: 50%;
+			margin-left: -100px;
+			width: 200px;
+			text-align: center;
+			color: #fff;
+			font-size: 36px;
+		}
 		.slide{
 		    width: 100%;
 		    height: 100%;
@@ -86,62 +97,39 @@
 			animation: rotateOutNewspaper .5s both ease-in;
 		}
 	</style>
-	<script type="text/javascript" src="../lib/jquery.min.js"></script>
+	<script type="text/javascript" src="../../asset/jquery/jquery.min.js"></script>
 </head>
 <body>
-	<!-- <div class="header" style="background-color: #dedede;">HEADER</div> -->
 	<div class="ysslide" id="ysslide">
 		<div class="section panel" style="background-color: green;">
-			<div class="ani" data-ani="bounceIn"></div>
-			first
+			<div class="info">FIRST</div>
 		</div>
 		<div class="section panel" style="background-color: #f0f;">
-			<div class="ani" data-ani="rotateInDownLeft"></div>
-			second
+			<div class="info">SECOND</div>
 		</div>
 		<div class="section panel" style="background-color: green;">
-			<div class="ani" data-ani="slideInLeft"></div>
-			third
+			<div class="info">THIRD</div>
 		</div>
 		<div class="section panel" style="background-color: blue;">
-			<div class="ani" data-ani="zoomIn"></div>
-			fourth
+			<div class="info">FOURTH</div>
 		</div>
 		<div class="section panel" style="background-color: #f0f;">
-			<div class="ani" data-ani="rubberband"></div>
-			fifth
+			<div class="info">FIFTH</div>
 		</div>
 	</div>
-	<!-- <div class="footer" style="background-color: #dedede;">FOOTER</div> -->
-	<script type="text/javascript" src="src/ys-slide.js"></script>
+	<script type="text/javascript" src="lib/ys-slide-min.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$('.panel').height($(window).height());
 
 			$('#ysslide').ysSlide({
 				renderType: 'inner',
-				// scrollbar: true,
 				scrollSpeed: 590,
-				delay: 900,
-				insertSection: '.header,.footer',
+				delay: 800,
 				animateClass: {
 					clazz: 'slide',
 					in: 'slide-in',
 					out: 'slide-out'
-				},
-				beforeScroll: function(curIndex,nextIndex){
-					var panels = this.panels,
-						$panel = $(panels[curIndex]),
-						$ani = $panel.find('.ani'),
-						animation = $ani.data('ani');
-					$ani.removeClass(animation);
-				},
-				afterScroll: function(curIndex){
-					var panels = this.panels,
-						$panel = $(panels[curIndex]),
-						$ani = $panel.find('.ani'),
-						animation = $ani.data('ani');
-					$ani.addClass(animation);
 				}
 			});
 		});

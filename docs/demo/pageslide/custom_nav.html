@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<title>Example</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.section{
+			position: relative;
+		}
+		.info{
+			position: absolute;
+			top: 50%;
+			margin-left: -23px;
+			left: 50%;
+			margin-left: -100px;
+			width: 200px;
+			text-align: center;
+			color: #fff;
+			font-size: 36px;
+		}
+
+		.cus-nav{
+			position: fixed;
+			width: 20px;
+			top: 50%;
+			-webkit-transform: -webkit-translate(0,-50%);
+			-moz-transform: -moz-translate(0,-50%);
+			transform: translate(0,-50%);
+			right: 20px;
+			text-align: center;
+			vertical-align: middle;
+		}
+		.cus-nav-inner{
+			display: inline-block;
+		}
+		.cus-nav-item{
+			width: 15px;
+			height: 15px;
+			margin: 10px auto;
+			border: 2px solid #fff;
+			box-sizing: border-box;
+			border-radius: 50%;
+			cursor: pointer;
+
+			-webkit-transition: all .25s;
+			-moz-transition: all .25s;
+			transition: all .25s;
+		}
+		.cus-nav-item:not(.active):hover{
+			border: 1px solid #dedede;
+		}
+		.cus-nav-item.active{
+			background-color: #fff;
+			box-shadow: 0 0 10px rgba(255, 255, 255,.3), 0 0 3px rgba(255, 255, 255, .8);
+		}
+	</style>
+	<script type="text/javascript" src="../../asset/jquery/jquery.min.js"></script>
+</head>
+<body>
+	<div class="ysslide" id="ysslide">
+		<div class="section panel" style="background-color: green;">
+			<div class="info">FIRST</div>
+		</div>
+		<div class="section panel" style="background-color: #f0f;">
+			<div class="info">SECOND</div>
+		</div>
+		<div class="section panel" style="background-color: green;">
+			<div class="info">THIRD</div>
+		</div>
+		<div class="section panel" style="background-color: blue;">
+			<div class="info">FOURTH</div>
+		</div>
+		<div class="section panel" style="background-color: #f0f;">
+			<div class="info">FIFTH</div>
+		</div>
+	</div>
+	<div class="cus-nav">
+		<div class="cus-nav-inner">
+			<div class="cus-nav-item" data-index="0"></div>
+			<div class="cus-nav-item" data-index="1"></div>
+			<div class="cus-nav-item" data-index="2"></div>
+			<div class="cus-nav-item" data-index="3"></div>
+			<div class="cus-nav-item" data-index="4"></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="lib/ys-slide-min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.panel').height($(window).height());
+			var navs = $('.cus-nav-item');
+			navs.on('click', function(){
+				var $ele = $(this),
+					index = $ele.data('index');
+				$('#ysslide').ysSlide('move', index);
+			});
+			$('#ysslide').ysSlide({
+				scrollSpeed: 1000,
+				beforeScroll:function(curIndex, nextIndex){
+					$(navs[curIndex]).removeClass('active');
+					$(navs[nextIndex]).addClass('active');
+				},
+				afterScroll:function(curIndex){
+				}
+			});
+		});
+	</script>
+</body>
+</html>`
