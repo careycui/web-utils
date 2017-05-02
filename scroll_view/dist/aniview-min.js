@@ -1,0 +1,1 @@
+!function(e,n){if("function"==typeof define&&define.amd)define.amd?define(["jQuery"],function(){return n(jQuery)}):define(function(e,o,i){var f=e("jQuery");i.exports=n(f)});else{if("object"!=typeof module||!module.exports)return n(e),e;module.exports=n(e)}}(jQuery,function(e){console.log("ani view ani view!")});

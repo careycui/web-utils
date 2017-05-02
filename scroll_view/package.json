@@ -1,20 +1,20 @@
 {
-  "name": "full_page_slide",
+  "name": "scroll_view",
   "version": "1.0.0",
-  "description": "page slide for pc / mobile",
-  "main": "index.js",
+  "description": "scroll animation view",
+  "main": "index.html",
   "scripts": {
     "build": "gulp copy & gulp uglify"
   },
   "keywords": [
-    "page",
-    "slide"
+    "screen",
+    "scroll",
+    "animation"
   ],
   "author": "chy",
   "license": "ISC",
   "devDependencies": {
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^2.1.2",
-    "pump": "^1.0.2"
+    "gulp-uglify": "^2.1.2"
   }
 }
