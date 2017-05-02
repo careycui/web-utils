@@ -24,8 +24,10 @@
 
 	var _aniView = void 0,
 		_elements = [],
+		_elements_entry = [],
 		_viewPort = {},
 		_container = void 0,
+		nearest = false,
 		defaults = {
 			container:'',
 			aniClass: '.ani',
@@ -48,8 +50,25 @@
 			};
 		}
 	}
-	function _isEntryView(ele, viewPercent){
-		var _viewer = viewPortSize(),
+	function _nearest(viewBottom, eleTop){
+		var cur = Math.abs(eleTop - viewBottom),
+			diff = 0,
+			flag = true;
+		for(var i=0;i<_elements.length;i++){
+			if(_isEntryView(_elements[i], true)){
+				diff = Math.abs($(_elements[i].ele).offset().top - viewBottom);
+				if(cur > diff){
+					flag = false;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+	function _isEntryView(eleObj, withoutNearest){
+		var ele = $(eleObj.ele),
+			viewPercent = eleObj.viewPercent,
+			_viewer = viewPortSize(),
 			// 视口边界
 			viewTop = _viewer.top,
 			viewLeft = _viewer.left,
@@ -59,14 +78,20 @@
 			eleTop = ele.offset().top,
 			eleLeft = ele.offset().left,
 			eleBottom = eleTop + ele.height()*viewPercent,
-			eleRight = eleLeft + ele.width()*viewPercent;
-		return (eleTop <= viewBottom && eleBottom >= viewTop && eleLeft >= viewLeft && eleRight <= viewRight); 
+			eleRight = eleLeft + ele.width()*viewPercent,
+			result = (eleTop <= viewBottom && eleBottom >= viewTop && eleLeft >= viewLeft && eleRight <= viewRight);
+		
+		if(!withoutNearest && result && nearest){
+			result = _nearest(viewBottom, eleTop);
+		}
+
+		return result;
 	};
 	function _shouldReset(eleObj){
-		return (!_isEntryView($(eleObj.ele), eleObj.viewPercent) && eleObj.blocked && eleObj.active);
+		return (!_isEntryView(eleObj) && eleObj.blocked && eleObj.active);
 	};
 	function _shouldActive(eleObj){
-		return (_isEntryView($(eleObj.ele), eleObj.viewPercent) && !eleObj.blocked && !eleObj.active);
+		return (_isEntryView(eleObj) && !eleObj.blocked && !eleObj.active);
 	};
 	function _animate(){
 		$.each(_elements, function(i, eleObj){
@@ -84,6 +109,7 @@
 
 		this.options = options;
 		_container = options.container || ($(window));
+		nearest = (options.nearest !== undefined?options.nearest:false);
 
 		this.init();
 		_container.on('scroll', function(){
@@ -132,6 +158,7 @@
 		aniView:function(config){
 			if(!_aniView){
 				_aniView = new AniView(config);
+				_animate();
 			}
 		}
 	});
