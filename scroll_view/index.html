@@ -9,139 +9,95 @@
 			margin: 0;
 			padding: 0;
 		}
+		html, body{
+			height: 100%;
+		}
 		.section{
+			width: 100%;
+			height: 400%;
+		}
+		.panel{
 			position: relative;
 		}
-		.header,.footer{
-			height: 400px;
+		.panel-1, .panel-2, .panel-3, .panel-4, .panel-5, .panel-6, .panel-7, .panel-8{
 			width: 100%;
+			height: 500px;
+			background-color: #fff;
+		}
+		.panel-2, .panel-4, .panel-6, .panel-8{
+			background-color: #dedede;
+		}
+		.panel-3, .panel-5, .panel-7{
+			background-color: #fff;
 		}
 		.ani{
 			position: absolute;
-			left:100px;
-			top: 400px;
-			width: 200px;
+			width: 300px;
 			height: 100px;
-			background: #000;
-		}
-		.slide{
-		    width: 100%;
-		    height: 100%;
-		    position: absolute;
-		    top: 0;
-		    left: 0;
-		    visibility: hidden;
-		    overflow: hidden;
-		    -webkit-backface-visibility: hidden;
-		    -moz-backface-visibility: hidden;
-		    backface-visibility: hidden;
-		    -webkit-transform: translate3d(0, 0, 0);
-		    -moz-transform: translate3d(0, 0, 0);
-		    transform: translate3d(0, 0, 0);
-		    -webkit-transform-style: preserve-3d;
-		    -moz-transform-style: preserve-3d;
-		    transform-style: preserve-3d;
-		    z-index: -1;
-		}
-		.ys-ani{
-			visibility: visible;
-    		z-index: 1;
-		}
-		@-webkit-keyframes moveFromLeft {
-			from{ -webkit-transform: translateX(-100%);  }
-			to { -webkit-transform: translateX(0); }
-		}
-		@-moz-keyframes moveFromLeft {
-			from{ -moz-transform: translateX(-100%);  }
-			to { -moz-transform: translateX(0); }
-		}
-		@keyframes moveFromLeft {
-			from{ transform: translateX(-100%);  }
-			to { transform: translateX(0); }
-		}
-		.slide-in{
-			-webkit-animation: moveFromLeft .6s ease both;
-			-moz-animation: moveFromLeft .6s ease both;
-			animation: moveFromLeft .6s ease both;
-			z-index: 2;
-		}
-		@-webkit-keyframes rotateOutNewspaper {
-			from{ -webkit-transform: translateZ(0) rotateZ(0); opacity: 1; }
-			to { -webkit-transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
-		}
-		@-moz-keyframes rotateOutNewspaper {
-			from{ -moz-transform: translateZ(0) rotateZ(0); opacity: 1; }
-			to { -moz-transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
-		}
-		@keyframes rotateOutNewspaper {
-			from{ transform: translateZ(0) rotateZ(0); opacity: 1; }
-			to { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
-		}
-		.slide-out{
-			-webkit-transform-origin: 50% 50%;
-			-webkit-animation: rotateOutNewspaper .5s both ease-in;
-			-moz-transform-origin: 50% 50%;
-			-moz-animation: rotateOutNewspaper .5s both ease-in;
-			transform-origin: 50% 50%;
-			animation: rotateOutNewspaper .5s both ease-in;
+			background-color: #f0f;
 		}
 	</style>
 	<script type="text/javascript" src="../lib/jquery.min.js"></script>
 </head>
 <body>
-	<!-- <div class="header" style="background-color: #dedede;">HEADER</div> -->
-	<div class="ysslide" id="ysslide">
-		<div class="section panel" style="background-color: green;">
-			<div class="ani" data-ani="bounceIn"></div>
-			first
+	<div class="section" style="background-color: green;">
+		<div class="panel panel-1">
+			<div class="ani" data-animation="fadeInLeft" style="left:200px;top:100px;"></div>
+			<div class="ani" data-animation="fadeInRight" style="left:500px;top:100px;"></div>
+			<div class="ani" data-animation="swing" style="left:350px;top:200px;"></div>
 		</div>
-		<div class="section panel" style="background-color: #f0f;">
-			<div class="ani" data-ani="rotateInDownLeft"></div>
-			second
+		<div class="panel panel-2">
+			<div class="ani" data-animation="bounceInLeft" style="left:200px;top:100px;"></div>
+			<div class="ani" data-animation="bounceInRight" style="left:500px;top:100px;"></div>
+			<div class="ani" data-animation="bounce" style="left:350px;top:200px;"></div>
 		</div>
-		<div class="section panel" style="background-color: green;">
-			<div class="ani" data-ani="slideInLeft"></div>
-			third
+		<div class="panel panel-3">
+			<div class="ani" data-animation="slideInLeft" style="left:200px;top:100px;"></div>
+			<div class="ani" data-animation="slideInRight" style="left:500px;top:100px;"></div>
 		</div>
-		<div class="section panel" style="background-color: blue;">
-			<div class="ani" data-ani="zoomIn"></div>
-			fourth
+		<div class="panel panel-4">
+			<div class="ani" data-animation="rotateInDownLeft" style="left:200px;top:100px;"></div>
+			<div class="ani" data-animation="rotateInDownRight" style="left:500px;top:100px;"></div>
+			<div class="ani" data-animation="rotateIn" style="left:350px;top:200px;"></div>
 		</div>
-		<div class="section panel" style="background-color: #f0f;">
-			<div class="ani" data-ani="rubberband"></div>
-			fifth
+		<div class="panel panel-5">
+			<div class="ani" data-animation="zoomInLeft" style="left:200px;top:100px;"></div>
+			<div class="ani" data-animation="zoomInRight" style="left:500px;top:100px;"></div>
+			<div class="ani" data-animation="zoomIn" style="left:350px;top:200px;"></div>
+		</div>
+		<div class="panel panel-6">
+			<div class="ani" data-animation="rotateInDownLeft" style="left:200px;top:100px;"></div>
+			<div class="ani" data-animation="rotateInDownRight" style="left:500px;top:100px;"></div>
+			<div class="ani" data-animation="rotateIn" style="left:350px;top:200px;"></div>
+		</div>
+		<div class="panel panel-7">
+			<div class="ani" data-animation="rollIn" style="left:200px;top:100px;"></div>
+			<div class="ani" data-animation="wobble" style="left:500px;top:100px;"></div>
+		</div>
+		<div class="panel panel-8">
+			<div class="ani" data-animation="shake" style="left:200px;top:100px;"></div>
+			<div class="ani" data-animation="pulse" style="left:500px;top:100px;"></div>
 		</div>
 	</div>
-	<!-- <div class="footer" style="background-color: #dedede;">FOOTER</div> -->
-	<script type="text/javascript" src="src/ys-slide.js"></script>
+	<script type="text/javascript" src="src/aniview.js"></script>
 	<script type="text/javascript">
 		$(function(){
-			$('.panel').height($(window).height());
-
-			$('#ysslide').ysSlide({
-				renderType: 'inner',
-				// scrollbar: true,
-				scrollSpeed: 590,
-				delay: 900,
-				insertSection: '.header,.footer',
-				animateClass: {
-					clazz: 'slide',
-					in: 'slide-in',
-					out: 'slide-out'
+			$.aniView({
+				aniClass: '.panel',
+				viewPercent: 0.4,
+				beforeAnimate: function(eleObj){
+					var $ele = $(eleObj.ele);
+					$ele.find('.ani').each(function(i, ani){
+						var animation = $(ani).data('animation');
+						$(ani).addClass(animation);
+					});
 				},
-				beforeScroll: function(curIndex,nextIndex){
-					var panels = this.panels,
-						$panel = $(panels[curIndex]),
-						$ani = $panel.find('.ani'),
-						animation = $ani.data('ani');
-					$ani.removeClass(animation);
-				},
-				afterScroll: function(curIndex){
-					var panels = this.panels,
-						$panel = $(panels[curIndex]),
-						$ani = $panel.find('.ani'),
-						animation = $ani.data('ani');
-					$ani.addClass(animation);
+				afterAnimate: function(eleObj){
+					var $ele = $(eleObj.ele);
+					$ele.find('.ani').each(function(i, ani){
+						var animation = $(ani).data('animation');
+						$(ani).removeClass(animation);
+					});
 				}
 			});
 		});
