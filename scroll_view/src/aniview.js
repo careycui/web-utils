@@ -54,6 +54,25 @@
 			};
 		}
 	}
+	function atTop(){
+		var port = viewPortSize();
+		return (port.top <= 10?true:false);
+	}
+	function atBottom(){
+		var docHeight,
+			height,
+			port = viewPortSize();
+
+		if(_container && _container[0].document !== window.document){
+			docHeight = window.document.documentElement.offsetHeight;
+			height = window.document.documentElement.clientHeight;
+		}else{
+			docHeight = _container[0].offsetHeight+_container[0].scrollTop;
+			height = _container[0].clientHeight;
+		}
+
+		return ((port.top + height)>=(docHeight-10)?true:false);
+	}
 	/**
 	 * 当可视窗口中存在多个动画元素时，并且nearest==true时，取离可视窗口底部最近的动画元素
 	 *		一般用来做页面分区导航
@@ -71,7 +90,7 @@
 		for(var i=0;i<_elements.length;i++){
 			if(_isEntryView(_elements[i], true)){
 				tmp = $(_elements[i].ele);
-				tmpTop = tmp.offset().top + tmp.height()*_elements[i].viewPercent
+				tmpTop = _getOffset(tmp[0]).top + tmp.height()*_elements[i].viewPercent
 				diff = Math.abs(tmpTop - viewBottom);
 				if(cur > diff){
 					flag = false;
@@ -80,6 +99,24 @@
 			}
 		}
 		return flag;
+	}
+	function _getOffset(eleDom){
+		var offsetTop = eleDom.offsetTop;
+		var offsetLeft = eleDom.offsetLeft;
+
+		while(eleDom.offsetParent){
+			eleDom = eleDom.offsetParent;
+			if(!isNaN(eleDom.offsetTop)){
+				offsetTop += eleDom.offsetTop;
+			}
+			if(!isNaN(eleDom.offsetLeft)){
+				offsetLeft += eleDom.offsetLeft;
+			}
+		}
+		return {
+			top: offsetTop,
+			left: offsetLeft
+		}
 	}
 	/**
 	 * 判断元素是否进入到可视窗口，并确定是否需要计算符合最近的要求
@@ -97,14 +134,21 @@
 			viewBottom = viewTop + _container.height(),
 			viewRight = viewLeft + _container.width(),
 			// 元素边界
-			eleTop = ele.offset().top + ele.height()*viewPercent,
-			eleLeft = ele.offset().left + ele.width()*viewPercent,
+			eleOffset = _getOffset(ele[0]),
+			eleTop = eleOffset.top + ele.height()*viewPercent,
+			eleLeft = eleOffset.left + ele.width()*viewPercent,
 			eleBottom = eleTop + (1 - viewPercent)*ele.height(),
 			eleRight = eleLeft + (1 - viewPercent)*ele.width(),
 			result = (eleTop <= viewBottom && eleBottom >= viewTop && eleLeft >= viewLeft && eleRight <= viewRight);
 
 		if(!withoutNearest && result && nearest){
-			result = _nearest(viewBottom, eleTop);
+			if(atTop()){
+				result = _nearest(viewTop, eleTop);
+			}else if(atBottom()){
+				result = _nearest(viewBottom, eleTop);
+			}else{
+				result = _nearest((viewBottom-_container.height()/2), eleTop);
+			}
 		}
 
 		return result;
