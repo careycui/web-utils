@@ -28,13 +28,16 @@
 		_viewPort = {}, //视口对象
 		_container = void 0, //插件容器
 		nearest = false, //是否采用就近模式，严格模式，同一时间只存在一个活动元素
+		_loop = false,
 		//默认配置
 		defaults = {
-			container:'',
-			aniClass: '.ani',
+			container:'', //容器
+			delay: 200, //reset 方法执行延迟
+			aniClass: '.ani', //动画元素
+			loop: false, //元素动画效果是否可以重复展示，true可重复展示，flase只展示一次
 			viewPercent: 0.2, //动画元素有效边界
-			beforeAnimate: function(){},
-			afterAnimate: function(){}
+			animateCallback: function(){}, //执行动画后的回调方法
+			resetCallback: function(){} //执行reset后的回调方法
 		};
 	/**
 	 * 获取插件容器页面位置
@@ -147,7 +150,7 @@
 			}else if(atBottom()){
 				result = _nearest(viewBottom, eleTop);
 			}else{
-				result = _nearest((viewBottom-_container.height()/2), eleTop);
+				result = _nearest(viewBottom, eleTop);
 			}
 		}
 
@@ -178,7 +181,7 @@
 			if(eleObj){
 				if(_shouldActive(eleObj)){
 					_aniView.animate(eleObj, true);
-				}else if(_shouldReset(eleObj)){
+				}else if(_loop && _shouldReset(eleObj)){
 					_aniView.animate(eleObj, false);
 				}
 			}
@@ -190,6 +193,7 @@
 
 		this.options = options;
 		_container = options.container || ($(window));
+		_loop = options.loop;
 		nearest = (options.nearest !== undefined?options.nearest:false);
 
 		this.init();
@@ -209,30 +213,54 @@
 				active: false,
 				blocked: false,
 				animation: $(ele).data('viewAnimation'),
-				timer: void 0
+				callback: {
+					starter: void 0,
+					timer: void 0
+				}
 			});
 		});
 	};
 	AniView.prototype.animate = function(eleObj,shouldActive){
 		var that = this,
-			ops = that.options;
+			ops = that.options,
+			diff = 0;
 		if(shouldActive){
 			if(eleObj.blocked){
 				return false;
 			}
-			if(typeof ops.beforeAnimate == 'function'){
-				ops.beforeAnimate(eleObj);
-			}
 			eleObj.active = true;
 			eleObj.blocked = true;
+
 			$(eleObj.ele).addClass('active');
+			if(eleObj.animation){
+				$(eleObj.ele).addClass(eleObj.animation);
+			}
+			if(typeof ops.animateCallback == 'function'){
+				ops.animateCallback(eleObj);
+			}
 		}else{
-			$(eleObj.ele).removeClass('active');
+			if(!eleObj.blocked){
+				return false;
+			}
 			eleObj.active = false;
 			eleObj.blocked = false;
-			if(typeof ops.afterAnimate == 'function'){
-				ops.afterAnimate(eleObj);
+
+			if(eleObj.callback.timer){
+				diff = new Date().getTime() - eleObj.callback.starter;
+				clearTimeout(eleObj.callback.timer);
+			}else{
+				eleObj.callback.starter = new Date().getTime();
 			}
+			eleObj.callback.timer = setTimeout(function(){
+				$(eleObj.ele).removeClass('active');
+				if(eleObj.animation){
+				$(eleObj.ele).removeClass(eleObj.animation);
+			}
+				if(typeof ops.resetCallback == 'function'){
+					ops.resetCallback(eleObj);
+				}
+				eleObj.callback.timer = void 0;
+			},Math.abs(ops.delay - diff));
 		}
 	};
 	$.extend({

@@ -133,23 +133,29 @@
 				aniClass: '.panel',
 				viewPercent: 0.3,
 				nearest: true,
-				beforeAnimate: function(eleObj){
+				loop: true,
+				delay: 600,
+				animateCallback: function(eleObj){
 					var $ele = $(eleObj.ele),
 						index = $ele.index();
 					$ele.find('.ani').each(function(i, ani){
 						var animation = $(ani).data('animation');
 						$(ani).addClass(animation);
 					});
+					$('.nav-div-item').each(function(i,nav){
+						if(i != index){
+							$(nav).removeClass('active');
+						}
+					});;
 					$('.nav-div-item').eq(index).addClass('active');
 				},
-				afterAnimate: function(eleObj){
+				resetCallback: function(eleObj){
 					var $ele = $(eleObj.ele),
 						index = $ele.index();
 					$ele.find('.ani').each(function(i, ani){
 						var animation = $(ani).data('animation');
 						$(ani).removeClass(animation);
 					});
-					$('.nav-div-item').eq(index).removeClass('active');
 				}
 			});
 		});
