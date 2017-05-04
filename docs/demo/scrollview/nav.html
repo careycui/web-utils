@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Basic Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../asset/sys/sys.min.css">
+	<script type="text/javascript" src="../../asset/jquery/jquery.min.js"></script>
+	<style type="text/css">
+		.ani{
+			position: relative;
+			width: 100%;
+			height: 600px;
+		}
+		.cnt:nth-child(2n){
+			background-color: #f0f;
+		}
+		.cnt:nth-child(2n+1){
+			background-color: #ff0;
+		}
+		.cnt{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			margin-top: 50px;
+			margin-left: 50px;
+
+			-webkit-transition: all .6s;
+			-moz-transition: all .6s;
+			transition: all .6s;
+		}
+		.active .cnt{
+			opacity: 1;
+			margin-left: 0;
+			margin-top: 0;
+		}
+		.title{
+			position: absolute;
+			left: 50%;
+			margin-left: -100px;
+			top: 50%;
+			margin-top: -20px;
+			width: 200px;
+			text-align: center;
+			height: 40px;
+			line-height: 40px;
+			vertical-align: middle;
+			font-size: 24px;
+		}
+		.nav-div{
+			position: fixed;
+			top: 50px;
+			left: 100px;
+		}
+		.nav-div-item{
+			display: inline-block;
+			vertical-align: top;
+			width: 80px;
+			padding: 10px 0;
+			text-align: center;
+			border: 1px solid black;
+			-webkit-transition: all .3s;
+			-moz-transition: all .3s;
+			-ms-transition: all .3s;
+			transition: all .3s;
+		}
+		.nav-div-item.active{
+			border-color: #f00;
+			color: #f00;
+		}
+	</style>
+</head>
+<body>
+	<div class="ani">
+		<div class="cnt">
+			<div class="title">
+				First
+			</div>
+		</div>
+	</div>
+	<div class="ani">
+		<div class="cnt">
+			<div class="title">
+				Second
+			</div>
+		</div>
+	</div>
+	<div class="ani">
+		<div class="cnt">
+			<div class="title">
+				Third
+			</div>
+		</div>
+	</div>
+	<div class="ani">
+		<div class="cnt">
+			<div class="title">
+				Forth
+			</div>
+		</div>
+	</div>
+	<div class="ani">
+		<div class="cnt">
+			<div class="title">
+				Fifth
+			</div>
+		</div>
+	</div>
+	<div class="ani">
+		<div class="cnt">
+			<div class="title">
+				Sixth
+			</div>
+		</div>
+	</div>
+	<div class="ani">
+		<div class="cnt">
+			<div class="title">
+				Seventh
+			</div>
+		</div>
+	</div>
+	<div class="ani">
+		<div class="cnt">
+			<div class="title">
+				Eighth
+			</div>
+		</div>
+	</div>
+	<div class="nav-div">
+		<div class="nav-div-item">
+			First
+		</div>
+		<div class="nav-div-item">
+			Second
+		</div>
+		<div class="nav-div-item">
+			Third
+		</div>
+		<div class="nav-div-item">
+			Forth
+		</div>
+		<div class="nav-div-item">
+			Fifth
+		</div>
+		<div class="nav-div-item">
+			Sixth
+		</div>
+		<div class="nav-div-item">
+			Seventh
+		</div>
+		<div class="nav-div-item">
+			Eighth
+		</div>
+	</div>
+	<script type="text/javascript" src="lib/aniview.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$.aniView({
+				nearest: true,
+				loop: true,
+				animateCallback: function(eleObj){
+					var $ele = $(eleObj.ele),
+						index = $ele.index();
+					$('.nav-div-item').each(function(i,nav){
+						if(i != index){
+							$(nav).removeClass('active');
+						}
+					});
+					$('.nav-div-item').eq(index).addClass('active');
+				}
+			});
+		});
+	</script>
+</body>
+</html>

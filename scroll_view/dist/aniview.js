@@ -140,8 +140,8 @@
 			eleOffset = _getOffset(ele[0]),
 			eleTop = eleOffset.top + ele.height()*viewPercent,
 			eleLeft = eleOffset.left + ele.width()*viewPercent,
-			eleBottom = eleTop + (1 - viewPercent)*ele.height(),
-			eleRight = eleLeft + (1 - viewPercent)*ele.width(),
+			eleBottom = eleOffset.top + (1 - viewPercent)*ele.height(),
+			eleRight = eleOffset.left + (1 - viewPercent)*ele.width(),
 			result = (eleTop <= viewBottom && eleBottom >= viewTop && eleLeft >= viewLeft && eleRight <= viewRight);
 
 		if(!withoutNearest && result && nearest){
@@ -178,6 +178,7 @@
 	 */
 	function _animate(){
 		$.each(_elements, function(i, eleObj){
+
 			if(eleObj){
 				if(_shouldActive(eleObj)){
 					_aniView.animate(eleObj, true);
