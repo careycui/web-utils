@@ -24,8 +24,8 @@ defaults = {
 $.aniView();
 ```
 ## Demo
-1. [基本使用](https://careycui.github.io/web-utils/demo/scrollview/index.html)
-2. [子节点使用](https://careycui.github.io/web-utils/demo/scrollview/inner.html)
-3. [添加随动导航](https://careycui.github.io/web-utils/demo/scrollview/nav.html)
-4. [结合自定义CSS3](https://careycui.github.io/web-utils/demo/scrollview/custom.html)
-5. [元素动画重复展示](https://careycui.github.io/web-utils/demo/scrollview/loop.html)
+1. [基本使用](https://careycui.github.io/web-utils/demo/scroll_view/index.html)
+2. [子节点使用](https://careycui.github.io/web-utils/demo/scroll_view/inner.html)
+3. [添加随动导航](https://careycui.github.io/web-utils/demo/scroll_view/nav.html)
+4. [结合自定义CSS3](https://careycui.github.io/web-utils/demo/scroll_view/custom.html)
+5. [元素动画重复展示](https://careycui.github.io/web-utils/demo/scroll_view/loop.html)

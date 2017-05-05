@@ -66,9 +66,9 @@ $('.panel').height($(window).height());
 $('#ysslide').ysSlide({});
 ```  
 ## Demo  
-1. [基本使用](https://careycui.github.io/web-utils/demo/pageslide/index.html)
-2. [回调函数](https://careycui.github.io/web-utils/demo/pageslide/callback.html)
-3. [自定义导航条](https://careycui.github.io/web-utils/demo/pageslide/custom_nav.html)
-4. [自定义切换动画](https://careycui.github.io/web-utils/demo/pageslide/custom_tran.html)  
-5. [插入Header Footer](https://careycui.github.io/web-utils/demo/pageslide/header_footer.html)  
-6. [显示滚动条](https://careycui.github.io/web-utils/demo/pageslide/scroll.html)
+1. [基本使用](https://careycui.github.io/web-utils/demo/page_slide/index.html)
+2. [回调函数](https://careycui.github.io/web-utils/demo/page_slide/callback.html)
+3. [自定义导航条](https://careycui.github.io/web-utils/demo/page_slide/custom_nav.html)
+4. [自定义切换动画](https://careycui.github.io/web-utils/demo/page_slide/custom_tran.html)  
+5. [插入Header Footer](https://careycui.github.io/web-utils/demo/page_slide/header_footer.html)  
+6. [显示滚动条](https://careycui.github.io/web-utils/demo/page_slide/scroll.html)
