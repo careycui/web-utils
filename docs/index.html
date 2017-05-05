@@ -4,23 +4,143 @@
 	<meta charset="utf-8">
 	<title>Demo</title>
 	<link rel="stylesheet" type="text/css" href="asset/sys/sys.min.css">
+	<link rel="stylesheet" type="text/css" href="demo/animate_css/dist/animate-min.css">
 	<link rel="stylesheet" type="text/css" href="asset/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="asset/index.css">
 </head>
 <body>
 	<div class="ys-grid header">
-		<div class="ys-grid-row">
+		<div class="ys-grid-row header-info animation" data-animation="ani rubberband">
 			<div class="ys-cell">
 				<h1>Web Utils  <small>前端工具</small></h1>
+			</div>
+		</div>
+		<div class="ys-grid-row header-bg">
+			<canvas id="myCanvas"></canvas>
+		</div>
+	</div>
+	<div class="ys-grid content" style="margin-top: 50px;">
+		<div class="ys-grid-row">
+			<div class="ys-cell-6">
+				<div class="widget animation pright" data-animation="ani wobble">
+					<div class="info">
+						<div class="title">
+							Ani CSS
+						</div>
+						<div class="desc">
+							常用css3动画效果
+						</div>
+					</div>
+					<div class="hover">
+
+					</div>
+				</div>
+			</div>
+			<div class="ys-cell-6">
+				<div class="widget animation pleft" data-animation="ani rubberband">
+					<div class="info">
+						<div class="title">
+							Full Page Slide
+						</div>
+						<div class="desc">
+							全屏滚动切换插件，支持自定义事件，显示header/footer
+						</div>
+					</div>
+					<div class="hover">
+
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="ys-grid content">
 		<div class="ys-grid-row">
-			<div class="ys-cell">
-				<a href="demo/page_slide/index.html" target="_blank">Page Slide</a>
+			<div class="ys-cell-6">
+				<div class="widget animation pright" data-animation="ani bounce">
+					<div class="info">
+						<div class="title">
+							Scroll View
+						</div>
+						<div class="desc">
+							滚动条滚动，当元素进入可视窗口，展现动画效果
+						</div>
+					</div>
+					<div class="hover">
+
+					</div>
+				</div>
+			</div>
+			<div class="ys-cell-6">
+				<div class="widget animation pleft" data-animation="ani shake">
+					<div class="info">
+						<div class="title">
+							Image Carousel
+						</div>
+						<div class="desc">
+							图片轮播插件
+						</div>
+					</div>
+					<div class="hover">
+
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	<div class="ys-grid content">
+		<div class="ys-grid-row">
+			<div class="ys-cell-6">
+				<div class="widget animation pright" data-animation="ani rotateIn">
+					<div class="info">
+						<div class="title">
+							HTML5 Video Player
+						</div>
+						<div class="desc">
+							HTML5 视频播放插件
+						</div>
+					</div>
+					<div class="hover">
+
+					</div>
+				</div>
+			</div>
+			<div class="ys-cell-6">
+				<div class="widget animation pleft" data-animation="ani zoomIn">
+					<div class="info">
+						<div class="title">
+							Javascript Control Of Animation 
+						</div>
+						<div class="desc">
+							javascript控制实现简单CSS3动画效果
+						</div>
+					</div>
+					<div class="hover">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+
+	</div>
+	<script type="text/javascript" src="asset/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="demo/scroll_view/dist/aniview-min.js"></script>
+	<script type="text/javascript" src="asset/index.js"></script>
+	<script type="text/javascript">
+        $(function(){
+        	$.aniView({
+        		aniClass: '.ys-grid',
+        		delay: 600,
+        		animateCallback:function(eleObj){
+        			var $ele = $(eleObj.ele),
+        				$ani = $ele.find('.animation');
+        			$.each($ani,function(i,ele){
+        				$(ele).addClass($(ele).data('animation'));
+        			});
+        		}
+        	});
+        });
+    </script>
 </body>
 </html>

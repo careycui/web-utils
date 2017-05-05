@@ -1,30 +1,104 @@
+html,body{
+	overflow-x: hidden;
+}
 .header{
 	background-color: #fb8c00;
-    padding-left: 100px;
-    height: 120px;
+    height: 400px;
     border-bottom: 1px solid #fb8c00;
     line-height: 120px !important;
     vertical-align: middle;
+    background-color: rgba(0,0,0,0);
+}
+.footer{
+	height: 60px;
+	background: -webkit-linear-gradient(top left,#DC0000,#fb8c00);
+    background: -moz-linear-gradient(top left,#DC0000,#fb8c00);
+    background: -ms-linear-gradient(top left,#DC0000,#fb8c00);
+    background: -o-linear-gradient(top left,#DC0000,#fb8c00);
+    background: linear-gradient(to top left,#DC0000,#fb8c00);
+}
+.header-info{
+	position: absolute;
+	top: 0;
+	width: 1920px;
+	left: 50%;
+	margin-left: -960px;
+	padding-top: 120px;
+	height: 400px;
+	z-index: 2;
+}
+.header-info h1, .header-info small{
+	position: relative;
+	color: #fff;
+	text-align: center;
+}
+.header-info h1{
+	font-size: 44px;
+	text-shadow: 0 0 20px rgba(0,0,0,.5);
+}
+.header-info small{
+	font-size: 16px;
+	text-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+.header-info h1:after{
+	content: ' ';
+	position: absolute;
+	top: 80px;
+	left: 50%;
+	margin-left: -150px;
+	width: 300px;
+	border: 1px solid #fff;
+}
+.header-bg{
+	position: absolute;
+	top: 0;
+	width: 1920px;
+	left: 50%;
+	margin-left: -960px;
+	height: 400px;
+}
+#myCanvas{
+    overflow:hidden;
     background: -webkit-linear-gradient(top left,#DC0000,#fb8c00);
     background: -moz-linear-gradient(top left,#DC0000,#fb8c00);
     background: -ms-linear-gradient(top left,#DC0000,#fb8c00);
     background: -o-linear-gradient(top left,#DC0000,#fb8c00);
     background: linear-gradient(to top left,#DC0000,#fb8c00);
 }
-.header h1, .header small{
-	color: #fff;
+.ys-grid-row .ys-cell-6{
+	height: 300px;
 }
-.header small{
-	font-size: 16px;
-}
-.header h1:after{
-	content: ' ';
+.widget{
 	position: absolute;
-	top: 80px;
-	left: 0;
-	width: 200px;
-	border: 1px solid #fff;
+	top: 50%;
+	margin-top: -125px;
+	width: 400px;
+	height: 250px;
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 6px 10px rgba(0,0,0,.2), -4px 0 4px rgba(0,0,0,.1), 4px 0 4px rgba(0,0,0,.1);
 }
-.content{
-	padding: 160px 20px 20px 20px;
+.pright{
+	right: 50px;
+}
+.pleft{
+	left: 50px;
+}
+.widget .info{
+	width: 100%;
+	height: 100%;
+}
+.widget .info .title{
+	height: 125px;
+	padding-top: 80px;
+	font-size: 24px;
+	text-align: center;
+	font-weight: 600;
+}
+.widget .info .desc{
+	height: 125px;
+	padding-bottom: 80px;
+	font-size: 14px;
+	text-align: center;
+	color: #8bc34a;
 }
