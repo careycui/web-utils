@@ -1,0 +1,19 @@
+{
+  "name": "img_slide",
+  "version": "1.0.0",
+  "description": "img slide carousel",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "slide",
+    "carousel"
+  ],
+  "author": "chy",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.1.2"
+  }
+}
