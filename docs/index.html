@@ -193,6 +193,7 @@
 	<script type="text/javascript" src="asset/index.js"></script>
 	<script type="text/javascript">
         $(function(){
+        	var host = 'https://careycui.github.io/web-utils/';
         	$.aniView({
         		aniClass: '.ys-grid',
         		delay: 600,
@@ -207,7 +208,7 @@
         	$('.jump-link').on('click', function(e){
         		e.preventDefault();
         		var $ele = $(this),
-        			href = $ele.data('href'),
+        			href = host+$ele.data('href'),
         			$widget = $ele.parents('.widget'),
         			top = $widget.offset().top,
         			left = $widget.offset().left,
