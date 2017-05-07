@@ -130,6 +130,11 @@ html,body{
 	   -moz-transform-style: preserve-3d;
 	        transform-style: preserve-3d;
 }
+.hover h4{
+	margin-bottom: 5px;
+	text-align: center;
+	color: #fff;
+}
 .info-in{
 	-webkit-transition: all .5s ease-in-out;
 	-moz-transition: all .5s ease-in-out;
@@ -396,4 +401,34 @@ html,body{
 }
 .ys-btn-color--white:hover{
 	color: #dedede;
+}
+
+.api-container{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 400px;
+	height: 250px;
+	background-color: #e6158d;
+	z-index: 1000;
+	overflow-y: auto;
+	display: none;
+}
+.api-cnt{
+	position: relative;
+	width: 960px;
+	left: 50%;
+	margin-top: 20px;
+	margin-left: -470px;
+	padding: 50px 20px;
+	opacity: 0;
+
+	-webkit-transition: all .4s ease-out;
+	-moz-transition: all .4s ease-out;
+	transition: all .4s ease-out;
+}
+.api-cnt.active{
+	margin-top: 0;
+	margin-left: -480px;
+	opacity: 1;
 }
