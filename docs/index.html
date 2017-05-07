@@ -208,7 +208,7 @@
         	$('.jump-link').on('click', function(e){
         		e.preventDefault();
         		var $ele = $(this),
-        			href = host+$ele.data('href'),
+        			href = $ele.data('href'),
         			$widget = $ele.parents('.widget'),
         			top = $widget.offset().top,
         			left = $widget.offset().left,
