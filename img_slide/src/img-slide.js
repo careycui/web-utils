@@ -20,5 +20,22 @@
 		return $;
 	}
 })(jQuery,function($){
-	console.log('img slide');
+	'use strict';
+
+	function ImgSlide(ele, config){
+
+	}
+	//外部可调用方法
+ 	var public_method = ['moveTo'];
+	$.fn.imgSlide = function(config, param){
+		return this.each(function() {
+            var slider = $.data(this, 'slider');
+            if (!slider) {
+                return $.data(this, 'slider', new ImgSlider(this, config));
+            }
+            if (typeof config === "string" && (public_method.join(',').indexOf(config) > -1) && typeof slide[config] == "function") {
+                slider[config].apply(slider, param || []);
+            }
+        });
+	};	
 });

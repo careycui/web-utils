@@ -344,9 +344,9 @@ html,body{
 	transition: all .5s;
 }
 .widget:hover .info-push-in{
-	-webkit-transform: rotateY(90deg);
-	   -moz-transform: rotateY(90deg);
-	        transform: rotateY(90deg);
+	-webkit-transform: rotateY(90deg) translateZ(-100px);
+	   -moz-transform: rotateY(90deg) translateZ(-100px);
+	        transform: rotateY(90deg) translateZ(-100px);
 }
 .hover-pull-out{
 	position: absolute;
