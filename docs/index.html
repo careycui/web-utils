@@ -244,6 +244,9 @@
         			top: top
         		}, 900, 'easeOutQuint', function(){
         			$('.api-container').hide();
+        			$('html,body').css({
+						overflow: 'auto'
+					});
         		})
         	});
         });
