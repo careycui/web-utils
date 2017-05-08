@@ -7,8 +7,10 @@
     "gulp": "^3.9.1"
   },
   "devDependencies": {
+    "gulp-inject-string": "^1.1.0",
     "gulp-markdown": "^1.2.0",
     "gulp-rename": "^1.2.2",
+    "gulp-template": "^4.0.0",
     "pump": "^1.0.2",
     "pygmentize-bundled": "^2.3.0"
   },

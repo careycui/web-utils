@@ -6,7 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="asset/sys/sys.min.css">
 	<link rel="stylesheet" type="text/css" href="demo/animate_css/dist/animate-min.css">
 	<link rel="stylesheet" type="text/css" href="asset/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="./asset/markdown/markdown.css">
 	<link rel="stylesheet" type="text/css" href="asset/index.css">
 </head>
 <body>
@@ -177,11 +176,11 @@
 		</div>
 	</div>
 	<div class="api-container">
-		<div class="api-close">
-			
+		<div class="api-close ani">
+			×
 		</div>
 		<div class="api-cnt markdown-body">
-			
+			<iframe src="" id="frame" width="100%" height="100%" style="border:0;"></iframe>
 		</div>
 	</div>
 	<div class="footer">
@@ -193,7 +192,27 @@
 	<script type="text/javascript" src="asset/index.js"></script>
 	<script type="text/javascript">
         $(function(){
-        	var host = 'https://careycui.github.io/web-utils/';
+        	var host = 'https://careycui.github.io/web-utils/',
+        		left, top, scrollTop;
+        	$('#frame').on('load', function(e){
+        		$('html,body').css({
+					overflow: 'hidden'
+				});
+				$('.api-container').css({
+        			left: left + 'px',
+        			top: (top - scrollTop) + 'px'
+        		});
+        		$('.api-container').show();
+        		$('.api-container').animate({
+        			width: '100%',
+        			height: '100%',
+        			left: 0,
+        			top: 0
+        		}, 900, 'easeOutQuint', function(){
+        			$('.api-close').addClass('active');
+        			$('.api-cnt').addClass('active');
+        		});
+        	});
         	$.aniView({
         		aniClass: '.ys-grid',
         		delay: 600,
@@ -209,47 +228,23 @@
         		e.preventDefault();
         		var $ele = $(this),
         			href = $ele.data('href'),
-        			$widget = $ele.parents('.widget'),
-        			top = $widget.offset().top,
-        			left = $widget.offset().left,
-        			scrollTop = $(window).scrollTop();
-
-        		$.ajax({
-        			url: href,
-        			type: 'POST',
-        			dataType: 'html',
-        			beforeSend: function(){
-        			},
-        			success: function(result){
-        				if(result){
-        					var inner = result;
-        					$('html,body').css({
-        						overflow: 'hidden'
-        					});
-        					$('.api-container').css({
-			        			left: left + 'px',
-			        			top: (top - scrollTop) + 'px'
-			        		});
-			        		setTimeout(function(){
-			        			$('.api-container').show();
-			        		},0);
-			        		$('.api-container').animate({
-			        			width: '100%',
-			        			height: '100%',
-			        			left: 0,
-			        			top: 0
-			        		}, 700, 'easeOutQuint', function(){
-			        			$('.api-cnt').html(inner).addClass('active');
-			        		});
-        				}
-        			},
-        			complete: function(){
-
-        			},
-        			error: function(){
-
-        			}
-        		});
+        			$widget = $ele.parents('.widget');
+    			top = $widget.offset().top + $widget.height()/2,
+    			left = $widget.offset().left + $widget.width()/2,
+    			scrollTop = $(window).scrollTop();
+        		$('#frame').attr('src', href);
+        	});
+        	$('.api-close').on('click',function(){
+        		$('.api-close').removeClass('active');
+    			$('.api-cnt').removeClass('active');
+        		$('.api-container').animate({
+        			width: '0',
+        			height: '0',
+        			left: left,
+        			top: top
+        		}, 900, 'easeOutQuint', function(){
+        			$('.api-container').hide();
+        		})
         	});
         });
     </script>

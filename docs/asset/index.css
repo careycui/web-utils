@@ -407,16 +407,42 @@ html,body{
 	position: fixed;
 	left: 0;
 	top: 0;
-	width: 400px;
-	height: 250px;
+	width: 0;
+	height: 0;
 	background-color: #e6158d;
-	z-index: 1000;
+	z-index: 2;
 	overflow-y: auto;
 	display: none;
+}
+.api-close{
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	vertical-align: middle;
+	font-size: 40px;
+	color: #fff;
+	text-align: center;
+	cursor: pointer;
+	opacity: 0;
+}
+.api-close.active{
+	opacity:1;
+	-webkit-transition: all .4s;
+	-moz-transition: all .4s;
+	transition: all .4s;
+}
+.api-close:hover{
+	-webkit-animation-name: rubberband;
+ 	-moz-animation-name: rubberband;
+ 	animation-name: rubberband;
 }
 .api-cnt{
 	position: relative;
 	width: 960px;
+	height: 100%;
 	left: 50%;
 	margin-top: 20px;
 	margin-left: -470px;
