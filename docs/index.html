@@ -184,14 +184,17 @@
 		</div>
 	</div>
 	<div class="footer">
-
 	</div>
+	<div class="cover"></div>
 	<script type="text/javascript" src="asset/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="asset/jquery/jquery.easing.js"></script>
 	<script type="text/javascript" src="demo/scroll_view/dist/aniview-min.js"></script>
 	<script type="text/javascript" src="asset/index.js"></script>
 	<script type="text/javascript">
         $(function(){
+        	setTimeout(function(){
+        		$('.cover').remove();
+        	},1000);
         	var host = 'https://careycui.github.io/web-utils/',
         		left, top, scrollTop;
         	$('#frame').on('load', function(e){
