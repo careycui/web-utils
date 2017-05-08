@@ -1,5 +1,5 @@
 (function($, factory){
-	if (typeof define === 'function' && define.amd) {
+	if (typeof define === 'function') {
 	    if(define.amd){
 		    define(['jQuery'], function(){
 		    	return factory(jQuery);

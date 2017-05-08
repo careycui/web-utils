@@ -158,7 +158,7 @@
                 var curNavSrc = $(curNavImg).attr('src');
                 curNavImg.attr('src', getChangeSrc(curNavSrc, new RegExp(/[n]/), 'h'));
             },
-            outhandler: function(index) {
+            outhandler: function(index) { 
                 if (index == that.showIndex) return;
                 var $li = $(this);
                 var index = index,
