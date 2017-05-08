@@ -21,6 +21,12 @@
 	}
 })(jQuery,function($){
 	'use strict';
+	var defaults = {
+		timeCyc: 2000,
+		animation: 'slide',
+		beforeswitch: function(){},
+		afterSitch: function(){}
+	};
 
 	function ImgSlide(ele, config){
 
@@ -34,7 +40,7 @@
                 return $.data(this, 'slider', new ImgSlider(this, config));
             }
             if (typeof config === "string" && (public_method.join(',').indexOf(config) > -1) && typeof slide[config] == "function") {
-                slider[config].apply(slider, param || []);
+                slider[config].apply(slider, param);
             }
         });
 	};	

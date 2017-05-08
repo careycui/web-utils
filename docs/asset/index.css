@@ -351,13 +351,13 @@ html,body{
 .hover-pull-out{
 	position: absolute;
 	top: 0;
-	-webkit-transform: translate(130%,0);
-	   -moz-transform: translate(130%,0);
-	    -ms-transform: translate(130%,0);
-	        transform: translate(130%,0);
-	-webkit-transition: all .5s .05s;
-	-moz-transition: all .5s .05s;
-	transition: all .5s .05s;
+	-webkit-transform: translate(110%,0);
+	   -moz-transform: translate(110%,0);
+	    -ms-transform: translate(110%,0);
+	        transform: translate(110%,0);
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	transition: all .5s;
 }
 .widget:hover .hover-pull-out{
 	-webkit-transform: translate(0,0);
@@ -467,3 +467,47 @@ html,body{
 	opacity: 0;
 	filter: alpha(opacity=0);
 }
+.loading{
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,.15);
+	display: none;
+}
+.loading .loading-box{
+	position: absolute;
+	left: 50%;
+	margin-left: -15px;
+	top: 50%;
+	margin-top: -15px;
+	width: 30px;
+	height: 30px;
+}
+@keyframes square-spin {
+  25% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(0);
+            transform: perspective(100px) rotateX(180deg) rotateY(0); }
+
+  50% {
+    -webkit-transform: perspective(100px) rotateX(180deg) rotateY(180deg);
+            transform: perspective(100px) rotateX(180deg) rotateY(180deg); }
+
+  75% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(180deg);
+            transform: perspective(100px) rotateX(0) rotateY(180deg); }
+
+  100% {
+    -webkit-transform: perspective(100px) rotateX(0) rotateY(0);
+            transform: perspective(100px) rotateX(0) rotateY(0); } }
+
+.loading-box > div {
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid #e6158d;
+  -webkit-animation: square-spin 3s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+          animation: square-spin 3s 0s cubic-bezier(.09, .57, .49, .9) infinite; }

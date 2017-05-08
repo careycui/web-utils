@@ -43,6 +43,11 @@
 							<i class="fa fa-link"></i>  基本样式
 						</a>
 					</div>
+					<div class="loading">
+						<div class="loading-box">
+							<div></div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="ys-cell-6">
@@ -81,6 +86,11 @@
 						<a href="demo/page_slide/callback.html" class="ys-btn ys-btn-color--white" target=“_blank”>
 							<i class="fa fa-link"></i>  回调方法
 						</a>
+					</div>
+					<div class="loading">
+						<div class="loading-box">
+							<div></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -122,6 +132,11 @@
 							<i class="fa fa-link"></i>  自定义动画效果
 						</a>
 					</div>
+					<div class="loading">
+						<div class="loading-box">
+							<div></div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="ys-cell-6">
@@ -136,6 +151,11 @@
 					</div>
 					<div class="hover hover-zoom-out">
 
+					</div>
+					<div class="loading">
+						<div class="loading-box">
+							<div></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -156,6 +176,11 @@
 					<div class="hover hover-pull-out">
 
 					</div>
+					<div class="loading">
+						<div class="loading-box">
+							<div></div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="ys-cell-6">
@@ -170,6 +195,11 @@
 					</div>
 					<div class="hover hover-leftTop-out">
 
+					</div>
+					<div class="loading">
+						<div class="loading-box">
+							<div></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -196,8 +226,9 @@
         		$('.cover').remove();
         	},1000);
         	var host = 'https://careycui.github.io/web-utils/',
-        		left, top, scrollTop;
+        		left, top, scrollTop, $widget;
         	$('#frame').on('load', function(e){
+        		$widget.find('.loading').hide();
         		$('html,body').css({
 					overflow: 'hidden'
 				});
@@ -230,11 +261,12 @@
         	$('.jump-link').on('click', function(e){
         		e.preventDefault();
         		var $ele = $(this),
-        			href = $ele.data('href'),
-        			$widget = $ele.parents('.widget');
+        			href = $ele.data('href');
+    			$widget = $ele.parents('.widget');
     			top = $widget.offset().top + $widget.height()/2,
     			left = $widget.offset().left + $widget.width()/2,
     			scrollTop = $(window).scrollTop();
+    			$widget.find('.loading').show();
         		$('#frame').attr('src', href);
         	});
         	$('.api-close').on('click',function(){
