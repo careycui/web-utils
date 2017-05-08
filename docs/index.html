@@ -235,18 +235,18 @@
         		$('#frame').attr('src', href);
         	});
         	$('.api-close').on('click',function(){
+    			$('html,body').css({
+					overflowY: 'auto'
+				});
         		$('.api-close').removeClass('active');
     			$('.api-cnt').removeClass('active');
         		$('.api-container').animate({
         			width: '0',
         			height: '0',
-        			left: left,
-        			top: top
+        			left: left + 'px',
+        			top: (top- scrollTop) + 'px'
         		}, 900, 'easeOutQuint', function(){
         			$('.api-container').hide();
-        			$('html,body').css({
-						overflow: 'auto'
-					});
         		})
         	});
         });
