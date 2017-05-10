@@ -1,0 +1,40 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" type="text/css" href="../../asset/sys/sys.min.css"><link rel="stylesheet" type="text/css" href="../../asset/markdown/markdown.css"></head><body class="markdown-body"><h3 id="imgslide-">imgSlide 轮播插件</h3>
+<p>PC前端轮播插件。提供了核心的轮播方法，控制轮播跳转的方法。减少对相关样式规定，保证一定程度自由化。  </p>
+<h3 id="-">自定义配置</h3>
+<pre><code class="lang-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">slider</span><span class="o">:</span> <span class="s1">&#39;.slide-item&#39;</span><span class="p">,</span> <span class="c1">// 轮播对象</span>
+    <span class="nx">timeCyc</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="c1">//轮播间隔时间</span>
+    <span class="nx">animation</span><span class="o">:</span> <span class="s1">&#39;slide&#39;</span><span class="p">,</span> <span class="c1">//轮播方式</span>
+    <span class="nx">switchSpeed</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span> <span class="c1">//轮播切换时间</span>
+    <span class="nx">easing</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1">//动画速度曲线，需引入jquery easing 扩展库</span>
+    <span class="nx">beforeSwitch</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){},</span>
+    <span class="nx">afterSitch</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){}</span>
+<span class="p">};</span>
+</pre></div>
+
+</code></pre>
+<h3 id="-">方法调用</h3>
+<ol>
+<li>直接跳转到指定轮播项。index 指定轮播项索引<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">imgSlide</span><span class="p">(</span><span class="s1">&#39;goTo&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+</li>
+<li>切换到下一项<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">imgSlide</span><span class="p">(</span><span class="s1">&#39;next&#39;</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+</li>
+<li>切换到上一项<pre><code class="lang-javascript"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nx">selector</span><span class="p">).</span><span class="nx">imgSlide</span><span class="p">(</span><span class="s1">&#39;pre&#39;</span><span class="p">);</span>
+</pre></div>
+
+</code></pre>
+<h3 id="demo">Demo</h3>
+</li>
+<li><a href="https://careycui.github.io/web-utils/demo/img_slide/index.html">HTML元素</a></li>
+<li><a href="https://careycui.github.io/web-utils/demo/img_slide/image.html">image图片</a></li>
+<li><a href="https://careycui.github.io/web-utils/demo/img_slide/custom_nav.html">自定义导航</a></li>
+<li><a href="https://careycui.github.io/web-utils/demo/img_slide/custom_arrow.html">自定义箭头导航</a></li>
+<li><a href="https://careycui.github.io/web-utils/demo/img_slide/slide_ani.html">轮播效果</a></li>
+</ol>
+</body></html>
