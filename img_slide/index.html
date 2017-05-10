@@ -38,6 +38,100 @@
 		.slide-item:nth-child(2n+1){
 			background-color: #0ff;
 		}
+		.left-arrow{
+			position: absolute;
+			left: 0;
+			width: 40px;
+			height: 60px;
+			top: 50%;
+			margin-top: -30px;
+			background-color: rgba(0,0,0,.3);
+			cursor: pointer;
+			z-index: 2;
+			-webkit-transition: all .3s;
+			-moz-transition: all .3s;
+			transition: all .3s;
+		}
+		.left-arrow:hover{
+			background-color: rgba(0,0,0,.5)
+		}
+		.left-arrow:after{
+			content: ' ';
+			display: block;
+			width: 1px;
+			height: 20px;
+			background-color: #fff;			
+			-webkit-transform: translate(20px, -8px) rotate(40deg);
+			-moz-transform: translate(20px, -8px) rotate(40deg);		
+			transform: translate(20px, -8px) rotate(40deg);
+		}
+		.left-arrow:before{
+			content: ' ';
+			display: block;
+			width: 1px;
+			height: 20px;
+			background-color: #fff;			
+			-webkit-transform: translate(20px, 28px) rotate(-40deg);
+			-moz-transform: translate(20px, 28px) rotate(-40deg);		
+			transform: translate(20px, 28px) rotate(-40deg);
+		}
+		.right-arrow{
+			position: absolute;
+			right: 0;
+			width: 40px;
+			height: 60px;
+			top: 50%;
+			margin-top: -30px;
+			background-color: rgba(0,0,0,.3);
+			cursor: pointer;
+			z-index: 2;
+			-webkit-transition: all .3s;
+			-moz-transition: all .3s;
+			transition: all .3s;
+		}
+		.right-arrow:hover{
+			background-color: rgba(0,0,0,.5)
+		}
+		.right-arrow:after{
+			content: ' ';
+			display: block;
+			width: 1px;
+			height: 20px;
+			background-color: #fff;	
+			-webkit-transform: translate(20px, -8px) rotate(-40deg);
+			-moz-transform: translate(20px, -8px) rotate(-40deg);		
+			transform: translate(20px, -8px) rotate(-40deg);
+		}
+		.right-arrow:before{
+			content: ' ';
+			display: block;
+			width: 1px;
+			height: 20px;
+			background-color: #fff;	
+			-webkit-transform: translate(20px, 28px) rotate(40deg);
+			-moz-transform: translate(20px, 28px) rotate(40deg);		
+			transform: translate(20px, 28px) rotate(40deg);
+		}
+		.slide-nav{
+			position: absolute;
+			right: 0;
+			top: 10px;
+			width: 100px;
+			height: 20px;
+		}
+		.slide-nav .slide-nav-item{
+			width: 10px;
+			height: 10px;
+			border-radius: 50%;
+			background-color: #fff;
+			border: 1px solid #fff;
+			display: inline-block;
+			vertical-align: top;
+			cursor: pointer;
+		}
+		.slide-nav .slide-nav-item.active{
+			background-color: #000;
+		}
 	</style>
 </head>
 <body>
@@ -60,6 +154,16 @@
 		<div class="slide-item">
 			六
 		</div>
+		<div class="left-arrow"></div>
+		<div class="right-arrow"></div>
+		<div class="slide-nav">
+			<div class="slide-nav-item active" data-index="0"></div>
+			<div class="slide-nav-item" data-index="1"></div>
+			<div class="slide-nav-item" data-index="2"></div>
+			<div class="slide-nav-item" data-index="3"></div>
+			<div class="slide-nav-item" data-index="4"></div>
+			<div class="slide-nav-item" data-index="5"></div>
+		</div>
 	</div>
 	<div class="fade">
 		<div class="slide-item">
@@ -80,18 +184,36 @@
 		<div class="slide-item">
 			六
 		</div>
+		<div class="left-arrow"></div>
+		<div class="right-arrow"></div>
 	</div>
 	<script>
 		$(function(){
 			$('.slide').imgSlide({
 				timeCyc: 2000,
 				easing: 'easeInQuad',
-				switchSpeed: 1000,
+				switchSpeed: 600,
 				beforeSwitch: function(){
-					console.log(this.index,this.nextIndex);
+					var that = this;
+					// console.log(this.index,this.nextIndex);
+					$('.slide-nav-item').each(function(i, ele){
+						var $ele = $(ele),
+							index = $ele.data('index');
+						if(index == that.nextIndex){
+							$ele.addClass('active');
+						}else{
+							$ele.removeClass('active');
+						}
+					});
 				},
 				afterSwitch: function(){
-					console.log(this.index,this.nextIndex);
+					// console.log(this.index,this.nextIndex);
+				}
+			});
+			$('.slide-nav-item').on('click', function(){
+				var index = $(this).data('index');
+				if(!$(this).hasClass('active')){
+					$('.slide').imgSlide('goTo', index);
 				}
 			});
 			$('.fade').imgSlide({
@@ -100,11 +222,23 @@
 				animation: 'fade',
 				switchSpeed: 1000,
 				beforeSwitch: function(){
-					console.log(this.index,this.nextIndex);
+					// console.log(this.index,this.nextIndex);
 				},
 				afterSwitch: function(){
-					console.log(this.index,this.nextIndex);
+					// console.log(this.index,this.nextIndex);
 				}
+			});
+			$('.slide').on('click', '.left-arrow', function(){
+				$('.slide').imgSlide('pre');
+			});
+			$('.slide').on('click', '.right-arrow', function(){
+				$('.slide').imgSlide('next');
+			});
+			$('.fade').on('click', '.left-arrow', function(){
+				$('.fade').imgSlide('pre');
+			});
+			$('.fade').on('click', '.right-arrow', function(){
+				$('.fade').imgSlide('next');
 			});
 		});
 	</script>
