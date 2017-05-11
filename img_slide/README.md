@@ -31,3 +31,4 @@ $(selector).imgSlide('pre');
 3. [自定义导航](https://careycui.github.io/web-utils/demo/img_slide/custom_nav.html)
 4. [自定义箭头导航](https://careycui.github.io/web-utils/demo/img_slide/custom_arrow.html)
 5. [轮播效果](https://careycui.github.io/web-utils/demo/img_slide/slide_ani.html)
+6. [自定义轮播效果](https://careycui.github.io/web-utils/demo/img_slide/custom_slide.html)

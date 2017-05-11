@@ -24,7 +24,7 @@
 	var defaults = {
 		slider: '.slide-item', // 轮播对象
 		timeCyc: 2000, //轮播间隔时间
-		animation: 'slide', //轮播方式
+		animation: 'slide', //轮播方式 fade/slide/custom
 		switchSpeed: 600, //轮播切换时间
 		easing: '', //动画速度曲线
 		beforeSwitch: function(){},
@@ -79,6 +79,23 @@
 	 */
 	function _slideHandle(slide, type, init){
 		var _handle = {
+			custom: function(){
+				if(init){
+					slide.css({
+						position:'absolute',
+						visibility: 'visible',
+						left: 0,
+						top: 0
+					});
+				}else{
+					slide.css({
+						position:'absolute',
+						visibility: 'hidden',
+						left: 0,
+						top: 0
+					});
+				}
+			},
 			slide:function(){
 				if(init){
 					slide.css({
@@ -113,6 +130,9 @@
 			}
 		};
 		switch(type){
+			case 'custom':
+				_handle.custom();
+				break;
 			case 'slide':
 				_handle.slide();
 				break;
@@ -286,6 +306,28 @@
 			});
 
 			that.index = that.nextIndex;
+		}
+	};
+	ImgSlide.prototype.custom = function(){
+		var that = this,
+			ops = that.options,
+			slides = that.slides,
+			curSlide = slides[that.index],
+			nextSlide = slides[that.nextIndex];
+
+		if(that.index != that.nextIndex){
+			$(nextSlide.ele).css({
+				visibility: 'visible'
+			}).removeClass(nextSlide.out).addClass(nextSlide.ina);
+
+			$(curSlide.ele).removeClass(curSlide.ina).addClass(curSlide.out);
+			that.index = that.nextIndex;
+			setTimeout(function(){
+				that.isMoving = false;
+				$(curSlide.ele).css({
+					visibility: 'hidden'
+				});
+			}, ops.switchSpeed);
 		}
 	};
 	ImgSlide.prototype.openInterval = function(){
