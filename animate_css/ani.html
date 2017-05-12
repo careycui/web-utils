@@ -21,6 +21,12 @@
 		.ani-stage{
 			padding:130px 50px 0;
 	        margin-bottom: 50px;
+            -webkit-perspective: 500px;
+            -moz-perspective: 500px;
+            perspective: 500px;
+            -webkit-transform-style: preserve-3d;
+            -moz-transform-style: peserve-3d;
+            transform-style: preserve-3d;
 		}
 		#ani-element{
 			width:350px;
@@ -65,6 +71,9 @@
                     <button type="button" class="btn btn-primary ani-btn" data-animation="ani rubberband">Rubberband</button>
                     <button type="button" class="btn btn-primary ani-btn" data-animation="ani pulse">Pulse</button>
                     <button type="button" class="btn btn-primary ani-btn" data-animation="ani swing">Swing</button>
+                    <button type="button" class="btn btn-primary ani-btn" data-animation="ani skewXYShake">SkewXYShake</button>
+                    <button type="button" class="btn btn-primary ani-btn" data-animation="ani skewXShake">SkewXShake</button>
+                    <button type="button" class="btn btn-primary ani-btn" data-animation="ani skewYShake">SkewYShake</button>
                 </div>
                 <div class="category-box">
                     <h3>FadeIn Animation</h3>
@@ -106,20 +115,40 @@
                     <button class="btn btn-primary ani-btn" data-animation="ani slideInRight">slideInRight</button>
                 </div>
                 <div class="category-box">
+                    <h3>Slide Small Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInDownSm">slideInDownSm</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInUpSm">slideInUpSm</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInLeftSm">slideInLeftSm</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInRightSm">slideInRightSm</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInDownLeft">slideInDownLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInDownRight">slideInDownRight</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInUpRight">slideInUpRight</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani slideInUpLeft">slideInUpLeft</button>
+                </div>
+                <div class="category-box">
                     <h3>RotateIn Animation</h3>
-                    <button class="btn btn-primary ani-btn" data-animation="ani RotateIn">RotateIn</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rotateIn">RotateIn</button>
                     <button class="btn btn-primary ani-btn" data-animation="ani rotateInDownLeft">RotateInDownLeft</button>
-                    <button class="btn btn-primary ani-btn" data-animation="ani RotateInDownRight">RotateInDownRight</button>
-                    <button class="btn btn-primary ani-btn" data-animation="ani RotateInUpLeft">RotateInUpLeft</button>
-                    <button class="btn btn-primary ani-btn" data-animation="ani RotateInUpRight">RotateInUpRight</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rotateInDownRight">RotateInDownRight</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rotateInUpLeft">RotateInUpLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rotateInUpRight">RotateInUpRight</button>
+                </div>
+                <div class="category-box">
+                    <h3>Flip Animation</h3>
+                    <button class="btn btn-primary ani-btn" data-animation="ani flipXIn">FlipXIn</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani flipYIn">FlipYIn</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani flipInUp">FlipInUp</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani flipInDown">FlipInDown</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani flipInLeft">FlipInLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani flipInRight">flipInRight</button>
                 </div>
                 <div class="category-box">
                     <h3>RotateOut Animation</h3>
-                    <button class="btn btn-primary ani-btn" data-animation="ani RotateOut">RotateOut</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rotateOut">RotateOut</button>
                     <button class="btn btn-primary ani-btn" data-animation="ani rotateOutDownLeft">RotateOutDownLeft</button>
-                    <button class="btn btn-primary ani-btn" data-animation="ani RotateOutDownRight">RotateOutDownRight</button>
-                    <button class="btn btn-primary ani-btn" data-animation="ani RotateOutUpLeft">RotateOutUpLeft</button>
-                    <button class="btn btn-primary ani-btn" data-animation="ani RotateOutUpRight">RotateOutUpRight</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rotateOutDownRight">RotateOutDownRight</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rotateOutUpLeft">RotateOutUpLeft</button>
+                    <button class="btn btn-primary ani-btn" data-animation="ani rotateOutUpRight">RotateOutUpRight</button>
                 </div>
                 <div class="category-box">
                     <h3>ZoomIn Animation</h3>

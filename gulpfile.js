@@ -15,7 +15,8 @@ const startH = '<!DOCTYPE html>'+
 						'</head>'+
 						'<body class="markdown-body">';
 
-const endH = '</body></html>';
+const endH ='<script src="../../asset/reset_link.js"></script>'+
+			'</body></html>';
 
 gulp.task('copy', function(cb){
 	pump([
