@@ -15,7 +15,7 @@ gulp.task('uglify',function(cb){
 	pump([
 			gulp.src('src/*.js'), 
 			uglify({
-				mangle: ['exports','module','define','$','jQuery']
+				mangle:false
 			}),
 			rename(function(path){
 				path.basename += '-min' ;

@@ -1,12 +1,12 @@
 (function($,factory){
 	if(typeof define === 'function'){
 		if(define.amd){
-			define(['jQuery'], function(){
-		    	return factory(jQuery);
+			define(['jQuery'], function(jQuery){
+		    	return factory(jQuery || $);
 		    });
 		}else{
 			define(function(require, exports, module){
-	    		var jq = require('jQuery');
+	    		var jq = $ || require('jQuery');
 	    		module.exports = factory(jq);
 	    	});
 		}
