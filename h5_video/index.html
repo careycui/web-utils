@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>h5 video</title>
+	<style type="text/css">
+		.ch5-video{
+			position: absolute;
+			width: 1200px;
+			height: 610px;
+			left: 50%;
+			margin-left: -600px;
+		}
+		.ch5-video video{
+		    width: 100%;
+		    height: 100%;
+		    display: block;
+		    object-fit:fill;
+		}
+		.video-play{
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			background-color: #000;
+			background-image: url(about:blank);
+			text-align: center;
+		}
+		.video-play.playing, .video-play.pause{
+			background-color: transparent;
+			background-image: url(about:blank);
+		}
+		.video-play.playing .play-icon{
+			display: none;
+		}
+		.play-icon{
+			position: absolute;
+			top: 50%;
+			margin-top: -51px;
+			left: 50%;
+			margin-left: -52px;
+			display: inline-block;
+			cursor: pointer;
+		}
+		#video-box-2{
+			margin-top: 700px;
+		}
+	</style>
+</head>
+<body>
+	<div class="ch5-video" data-key="1">
+		<video class="" loop="true" src="http://square.ys7.com/play/index?videoId=1225ba145be4ea5f41bbb955718f713dc958">
+			<!-- <source src="https://statics.ys7.com/newmall/b2c/product/s5p/video/hx.mp4" type="video/mp4" /> -->
+		</video>
+		<div class="video-play">
+			<img class="play-icon" src="https://mfs.ys7.com/mall/fc505d8c67ad47cb67061f56bdcdd9d7.png">
+		</div>
+	</div> 
+	<div class="ch5-video" data-key="2">
+		<video class="" loop="true">
+			<source src="https://statics.ys7.com/newmall/b2c/product/s5p/video/hx.mp4" type="video/mp4" />
+		</video>
+		<div class="video-play">
+			<img class="play-icon" src="https://mfs.ys7.com/mall/fc505d8c67ad47cb67061f56bdcdd9d7.png">
+		</div>
+	</div> 
+	<script type="text/javascript" src="ch5_video.js"></script>
+	<script type="text/javascript">
+		function getElementsByClassName(dom,tagName,className) {
+	        var tag = dom.getElementsByTagName(tagName);
+	        var tagAll = [];
+	        for(var i = 0 ; i<tag.length ; i++){
+	            if(tag[i].className.indexOf(className) != -1){
+	                tagAll[tagAll.length] = tag[i];
+	            }
+	        }
+	 
+	        return tagAll;
+	 
+	    }
+	    function VideoObj(dom){
+	    	this.dom = dom;
+	    	this.$key = dom.getAttribute('data-key');
+	    	this.url = dom.getAttribute('data-video-url');
+	    	this.initDom();
+	    	this.addEvent();
+	    }
+	    VideoObj.prototype.initDom = function(){
+	    	var dom = this.dom;
+	    	var key = this.$key;
+	    	var Dvideo = dom.getElementsByTagName('video')[0];
+	    	var Dcover = getElementsByClassName(dom, 'div', 'video-play')[0];
+	    	Dvideo.id = 'ch5-video-' + key;
+	    	Dcover.id = 'video-cover-' + key;
+	    	dom.id = 'video-box-' + key;
+
+	    	this.Dvideo = Dvideo;
+	    	this.Dcover = Dcover;
+	    }
+	    VideoObj.prototype._videoPlay =function (){
+			this.Dvideo.play();
+			this.Dcover.classList.add('playing');
+			this.play_state = 'playing';
+		}
+		VideoObj.prototype._videoPause = function(){
+			this.Dvideo.pause()
+			this.Dcover.classList.remove('playing');
+			this.Dcover.classList.add('pause');
+			this.play_state = 'pause';
+		}
+	    VideoObj.prototype.addEvent = function(){
+	    	var Dvideo = this.Dvideo;
+	    	var Dcover = this.Dcover;
+	    	var _this = this;
+	    	if(window.addEventListener){
+				Dcover.addEventListener('click', function(){
+					if(!_this.play_state){
+						_this._videoPlay();
+					}else if(_this.play_state === 'playing'){
+						_this._videoPause();
+					}else{
+						_this._videoPlay();
+					}
+				},false);
+			}else{
+				Dcover.attachEvent('onclick', function(){
+					if(!_this.play_state){
+						_this._videoPlay();
+					}else if(_this.play_state === 'playing'){
+						_this._videoPause();
+					}else{
+						_this._videoPlay();
+					}
+				});
+			}
+	    }
+		function ch5Video(){
+			var Dboxs = getElementsByClassName(document, 'div', 'ch5-video');
+			var _checkVideo = (function(){
+				var video = document.createElement('video');
+				if(video.play){
+					return true;
+				}
+				return false;
+			})();
+			if(!_checkVideo){
+				for(var j=0;j<Dboxs.length;j++){
+					Dboxs[j].style.display = 'none';
+				}
+			}
+			var Dvideos = [];
+			for(var i=0;i<Dboxs.length;i++){
+				Dvideos.push(new VideoObj(Dboxs[i]));
+			}
+			
+		}
+		ch5Video();
+	</script>
+</body>
+</html>
