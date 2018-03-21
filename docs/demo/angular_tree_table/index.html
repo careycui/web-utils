@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Tree Table DEMO</title>
+	<link rel="stylesheet" type="text/css" href="asset/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="angular_tree.css">
+	<style>
+		.tl-l{
+			text-align: left !important;
+		}
+		.tl-r{
+			text-align: right !important;
+		}
+		.tl-c{
+			text-align: center !important;
+		}
+		.w500{
+			width: 550px;
+		}
+		.l-mw{
+			max-width: 500px;
+		}
+	</style>
+</head>
+<body ng-app="app">
+	<div class="container" ng-controller="main">
+		<div class="row">
+			<div class="col-md-12">
+				<h4>一、基本案例</h4>
+				<p>只展示数据，不额外设定表头</p>
+				<pre>&lt;tree-table tree="tree"&gt;&lt;/tree-table&gt;</pre>
+				<tree-table 
+					tree="tree">
+				</tree-table>
+			</div>
+			<div class="col-md-12">
+				<h4>二、可排序案例 <small>现只支持同级排序</small></h4>
+				<p>添加sortable标志，表示该表格可排序</p>
+				<pre>&lt;tree-table tree="tree" sortable&gt;&lt;/tree-table&gt;</pre>
+				<tree-table
+					sortable
+					tree="tree2">
+				</tree-table>
+			</div>
+			<div class="col-md-12">
+				<h4>三、展示操作列</h4>
+				<p>
+					在tree model中设置btns，并定义好点击操作按钮后的回调方法<br>
+					name 操作名称
+					fn_type 操作type,会在传递给回调函数
+					expression 判断按钮是否显示，表达式 true显示， 表达式 false 不显示
+				</p>
+				<pre>tree model增加btns设置:
+btns:[{
+	name: '新增子类',
+	fn_type: 'new_sub',
+	expression: 'node.count < 2'
+},{
+	name: '编辑',
+	fn_type: 'edit',
+	expression: true
+},{
+	name: '查看题目',
+	fn_type: 'check',
+	expression: 'node.data.publish == 1'
+},{
+	name: '删除',
+	fn_type: 'del',
+	expression: true
+}]
+
+&lt;tree-table tree="tree" sortable btn-handler="nodeClick(node, type)"&gt;&lt;/tree-table&gt;
+
+$scope.nodeClick = function(node, type){
+	alert(node.data.name + ' : ' + type);
+}
+				</pre>
+				<tree-table 
+					tree="tree3"
+					sortable
+					btn-handler="nodeClick(node, type)">
+				</tree-table>
+			</div>
+			<div class="col-md-12">
+				<h4>四、自定义列</h4>
+				<p>增加自定义展示列</p>
+				<pre>tree model增加thead和props配置:
+thead:[{
+		title: '子分类(个)'
+	},{
+		title: '状态',
+	}],
+props:['sub_num', 'status']
+&lt;tree-table tree="tree" sortable&gt;&lt;/tree-table&gt;</pre>
+				<tree-table
+					sortable
+					tree="tree4">
+				</tree-table>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript" src="asset/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="asset/angular/angular.min.js"></script>
+<script type="text/javascript" src="angular_tree.js"></script>
+<script>
+	angular.module('app', ['aui.angular-tree']).
+		factory('model', function(){
+			var model = {
+				thead:[{
+						title: '子分类(个)'
+					},{
+						title: '状态',
+					}],
+				props:['sub_num', 'status'],
+				btns:[{
+						name: '新增子类',
+						fn: 'btnHandler',
+						fn_type: 'new_sub',
+						expression: 'node.count < 2'
+					},{
+						name: '编辑',
+						fn: 'btnHandler',
+						fn_type: 'edit',
+						expression: true
+					},{
+						name: '查看题目',
+						fn: 'btnHandler',
+						fn_type: 'check',
+						expression: 'node.data.publish == 1'
+					},{
+						name: '删除',
+						fn: 'btnHandler',
+						fn_type: 'del',
+						expression: true
+				}],
+				data:[{
+					id: '1',
+					name: 'test1',
+					sub_num: 4,
+					status: '启用',
+					children:[{
+						id: '11',
+						name: 'test11',
+						sub_num: 1,
+						status: '启用',
+						children:[{
+							id: '111',
+							name: 'test111',
+							sub_num: 0,
+							status: '禁用',
+						}]
+					},{
+						id: '12',
+						name: 'test12',
+						sub_num: 1,
+						status: '启用',
+						children:[{
+							id: '121',
+							name: 'test121',
+							sub_num: 0,
+							status: '禁用',
+						}]
+					},{
+						id: '13',
+						name: 'test13',
+						sub_num: 1,
+						status: '启用',
+						children:[{
+							id: '131',
+							name: 'test131',
+							sub_num: 0,
+							status: '禁用',
+						}]
+					},{
+						id: '14',
+						name: 'test14',
+						sub_num: 1,
+						status: '启用',
+						children:[{
+							id: '141',
+							name: 'test141',
+							sub_num: 0,
+							status: '禁用',
+						}]
+					}]
+				},{
+					id: '2',
+					name: 'test2',
+					sub_num: 1,
+					status: '启用',
+					children:[{
+						id: '21',
+						name: 'test21',
+						sub_num: 1,
+						status: '启用',
+						children:[{
+							id: '211',
+							name: 'test211',
+							sub_num: 0,
+							status: '禁用',
+						}]
+					}]
+				},{
+					id: '3',
+					name: 'test3',
+					sub_num: 1,
+					status: '启用',
+					children:[{
+						id: '31',
+						name: 'test31',
+						sub_num: 1,
+						status: '启用',
+						children:[{
+							id: '311',
+							name: 'test311',
+							sub_num: 0,
+							status: '禁用',
+						}]
+					}]
+				},{
+					id: '4',
+					name: 'test4',
+					sub_num: 1,
+					status: '启用',
+					children:[{
+						id: '41',
+						name: 'test41',
+						sub_num: 1,
+						status: '启用',
+						children:[{
+							id: '411',
+							name: 'test411',
+							sub_num: 0,
+							status: '禁用',
+						}]
+					}]
+				},{
+					id: '5',
+					name: 'test5',
+					sub_num: 1,
+					status: '启用',
+					children:[{
+						id: '51',
+						name: 'test51',
+						sub_num: 1,
+						status: '启用',
+						children:[{
+							id: '511',
+							name: 'test511',
+							sub_num: 0,
+							status: '禁用',
+						}]
+					}]
+				},{
+					id: '6',
+					name: 'test6',
+					sub_num: 1,
+					status: '启用',
+					children:[{
+						id: '61',
+						name: 'test61',
+						sub_num: 1,
+						status: '启用',
+						children:[{
+							id: '611',
+							name: 'test611',
+							sub_num: 0,
+							status: '禁用',
+						}]
+					}]
+				}]
+			}
+
+			return{
+				getModel: function(){
+					return angular.copy(model);
+				},
+				getBaseModel: function(){
+					var m = angular.copy(model);
+					delete m.thead;
+					delete m.btns;
+					return m;
+				},
+				getBtnsModel: function(){
+					var m = angular.copy(model);
+					delete m.thead;
+					return m;
+				}
+			}
+		}).
+		controller('main', ['$scope', 'model', function($scope, model){
+			$scope.tree = model.getBaseModel();
+			$scope.tree2 = model.getBaseModel();
+			$scope.tree3 = model.getBtnsModel();
+			$scope.tree4 = model.getModel();
+			$scope.nodeClick = function(node, type){
+				alert(node.data.name + ' : ' + type);
+			}
+		}]);
+</script>
+</body>
+</html>
